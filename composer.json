@@ -12,6 +12,9 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "samuelbie/mpesa": "^1.5",
+        "spatie/laravel-enum": "^3.0",
+        "spatie/laravel-medialibrary": "^11.0",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
@@ -22,6 +25,7 @@
         "nunomaduro/collision": "^7.0",
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
+        "reliese/laravel": "^1.2",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
