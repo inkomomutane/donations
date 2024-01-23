@@ -14,7 +14,7 @@ import Header from "@/Layouts/partials/Header.vue";
                 class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 dark:bg-gray-900"
             >
                 <div class="container mx-auto px-6 py-8">
-                    <slot />
+                    <slot name="content" />
                 </div>
             </main>
         </div>

@@ -115,7 +115,9 @@ const logout = () => router.post(route("logout"));
             </button>
             <DropdownMenu>
                 <DropdownMenuTrigger>
-                    <div class="rounded-full bg-slate-500 dark:bg-slate-900 p-2 text-gray-50 ">
+                    <div
+                        class="rounded-full bg-slate-500 dark:bg-slate-900 p-2 text-gray-50"
+                    >
                         <svg
                             class="w-4 h-4"
                             xmlns="http://www.w3.org/2000/svg"

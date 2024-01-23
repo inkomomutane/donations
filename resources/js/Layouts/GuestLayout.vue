@@ -10,7 +10,7 @@ import logo from "@images/logo.png";
     >
         <div>
             <Link href="/">
-               <img :src="logo" class="w-32" />
+                <img :src="logo" class="w-32" />
             </Link>
         </div>
 

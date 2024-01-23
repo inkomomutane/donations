@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Province;
 
 use App\Http\Controllers\Controller;
 use App\Models\Province;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class UpdateProvinceController extends Controller
 {
-    public function __invoke(Province $province,\Request $request)
+    public function __invoke(Province $province,Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255', Rule::unique('provinces','name')->ignore($province->id)]

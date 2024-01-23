@@ -36,18 +36,27 @@ Route::middleware('auth')->group(function () {
 
     // Início das rotas para o CRUD de Províncias
     Route::get('/todas/provincias', App\Http\Controllers\Province\GetProvincesController::class)
-        ->name('provincias.index');
+        ->name('province.index');
     Route::get('/provincia/criar', App\Http\Controllers\Province\CreateProvinceController::class)
-        ->name('provincias.create');
+        ->name('province.create');
     Route::post('/provincia/salvar', App\Http\Controllers\Province\StoreProvinceController::class)
-        ->name('provincias.store');
+        ->name('province.store');
     Route::get('/provincia/{province}/editar', App\Http\Controllers\Province\EditProvinceController::class)
-        ->name('provincias.edit');
+        ->name('province.edit');
     Route::patch('/provincia/{province}/atualizar', App\Http\Controllers\Province\UpdateProvinceController::class)
-        ->name('provincias.update');
+        ->name('province.update');
     Route::delete('/provincia/{province}/deletar', App\Http\Controllers\Province\DeleteProvinceController::class)
-        ->name('provincias.destroy');
+        ->name('province.delete');
     // Fim das rotas para o CRUD de Províncias
+    // Início das rotas para o CRUD de Causas
+    Route::get('/todas/causas', App\Http\Controllers\Cause\GetCausesController::class)
+        ->name('cause.index');
+    Route::post('/causa/salvar', App\Http\Controllers\Cause\StoreCauseController::class)
+        ->name('cause.store');
+    Route::patch('/causa/{cause}/atualizar', App\Http\Controllers\Cause\UpdateCauseController::class)
+        ->name('cause.update');
+    Route::delete('/causa/{cause}/deletar', App\Http\Controllers\Cause\DeleteCauseController::class)
+        ->name('cause.delete');
 });
 
 
