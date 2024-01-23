@@ -7,17 +7,19 @@
 namespace App\Models;
 
 use App\Data\CampaignData;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\LaravelData\WithData;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 
-class Campaign extends Model
+class Campaign extends Model implements  HasMedia
+
 {
     use HasUlids;
     use WithData;
+    use InteractsWithMedia;
 
 	protected $table = 'campaigns';
 	public $incrementing = false;
@@ -72,4 +74,11 @@ class Campaign extends Model
     {
 		return $this->hasMany(CampaignTransaction::class);
 	}
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('campaigns')
+            ->withResponsiveImages()
+            ->singleFile();
+    }
 }
