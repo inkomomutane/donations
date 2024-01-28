@@ -34,6 +34,10 @@ export interface Causes extends Omit<PaginatedData, "data"> {
     data: Array<App.Data.CauseData>;
 }
 
+export interface Districts extends Omit<PaginatedData, "data"> {
+    data: Array<App.Data.DistrictData>;
+}
+
 export interface User {
     id: number;
     name: string;

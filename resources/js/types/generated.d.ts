@@ -20,6 +20,11 @@ declare namespace App.Data {
         title: string | null;
         description: string | null;
     };
+    export type DistrictData = {
+        id: string | null;
+        name: string | null;
+        province: any | App.Data.ProvinceData | null;
+    };
     export type ProvinceData = {
         id: string | null;
         name: string | null;

@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\District\CreateDistrict;
+use App\Http\Controllers\District\DeleteDistrict;
+use App\Http\Controllers\District\GetDistricts;
+use App\Http\Controllers\District\UpdateDistrict;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -57,6 +61,13 @@ Route::middleware('auth')->group(function () {
         ->name('cause.update');
     Route::delete('/causa/{cause}/deletar', App\Http\Controllers\Cause\DeleteCauseController::class)
         ->name('cause.delete');
+
+    #--- District Routes ---#
+
+    Route::get('/district/list', GetDistricts::class)->name('district.list');
+    Route::post('/district/store', CreateDistrict::class)->name('district.store');
+    Route::match(['put','patch'],'/district/{district}/update', UpdateDistrict::class)->name('district.update');
+    Route::delete('/district/{district}/delete', DeleteDistrict::class)->name('district.delete');
 });
 
 
