@@ -30,7 +30,7 @@ const inactiveClass = ref(
             <div class="flex items-start justify-start mt-8 ml-3">
                 <Link href="/" class="flex items-center">
                     <img :src="logo" class="w-12" />
-                    <span class="text-white text-2xl font-bold mx-2">SISB</span>
+                    <span class="text-white text-2xl font-bold mx-2">Donations</span>
                 </Link>
             </div>
 
@@ -60,7 +60,7 @@ const inactiveClass = ref(
                         />
                     </svg>
 
-                    <span class="mx-4 font-bold text-base">Dashboard</span>
+                    <span class="mx-4 font-bold text-base">Campanhas</span>
                 </Link>
                 <Link
                     class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"

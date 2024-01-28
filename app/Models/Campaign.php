@@ -44,7 +44,7 @@ class Campaign extends Model implements  HasMedia
 		'end_date',
 		'status',
 		'priority',
-		'province_id',
+		'district_id',
 		'cause_id',
 		'posted_at',
 		'posted_by_id'
@@ -60,9 +60,9 @@ class Campaign extends Model implements  HasMedia
 		return $this->belongsTo(User::class, 'posted_by_id');
 	}
 
-	public function province(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+	public function district(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-		return $this->belongsTo(Province::class);
+		return $this->belongsTo(District::class);
 	}
 
 	public function campaignComments(): \Illuminate\Database\Eloquent\Relations\HasMany
