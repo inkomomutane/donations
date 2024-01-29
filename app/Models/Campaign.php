@@ -7,6 +7,8 @@
 namespace App\Models;
 
 use App\Data\CampaignData;
+use App\Enums\CampaignEnum;
+use App\Enums\CampaignPriorityEnum;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\LaravelData\WithData;
@@ -26,12 +28,14 @@ class Campaign extends Model implements  HasMedia
     protected  string $dataClass = CampaignData::class;
 
 	protected $casts = [
-		'content' => 'json',
-		'goal_amount' => 'int',
-		'current_amount' => 'int',
+		'goal_amount' => 'float',
+		'current_amount' => 'float',
 		'start_date' => 'datetime',
 		'end_date' => 'datetime',
-		'posted_at' => 'datetime'
+		'posted_at' => 'datetime',
+        'status' => CampaignEnum::class,
+        'priority' => CampaignPriorityEnum::class,
+
 	];
 
 	protected $fillable = [
@@ -77,8 +81,6 @@ class Campaign extends Model implements  HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('campaigns')
-            ->withResponsiveImages()
-            ->singleFile();
+        $this->addMediaCollection('campaigns');
     }
 }

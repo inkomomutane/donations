@@ -6,7 +6,12 @@ import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 import VueSelect from "vs-vue3-select";
+import VueDatePicker from "@vuepic/vue-datepicker";
+import '../css/vue-date-picker.css'
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import "vs-vue3-select/dist/vs-vue3-select.css";
+import PrimeVue from 'primevue/config';
 import.meta.glob(["../images/**", "../fonts/**"]);
 const appName = import.meta.env.VITE_APP_NAME || "Donations";
 import "@/components/select/select.css";
@@ -21,7 +26,10 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .component('v-select',VueSelect)
+            .component("QuillEditor", QuillEditor)
+            .component('VueDatePicker',VueDatePicker)
             .use(ZiggyVue)
+            .use(PrimeVue)
             .mount(el);
     },
     progress: {

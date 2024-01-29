@@ -1,11 +1,32 @@
 <script setup lang="ts">
 import Modal from "@/components/Modal.vue";
+import ImageUploader from "@components/ImageUploader.vue";
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
+import { vMaska } from "maska"
+
+const props =  defineProps({
+    causes : {
+        type : Array<App.Data.CauseData>,
+        required : true
+    },
+    districts : {
+        type : Array<App.Data.DistrictData>,
+        required : true
+    },
+    priorities : {
+        type : Array,
+        required : true
+    },
+    statuses : {
+        type : Array,
+        required : true
+    }
+})
+
 const addCampaign = ref(false);
 const titleInput = ref();
-const descriptionInput = ref();
 const addCampaignTrigger = () => {
     addCampaign.value = true;
 };
@@ -17,18 +38,27 @@ const closeCreateCampaignModal = () => {
 const form = useForm({
     title: "",
     description: "",
+    content: "",
+    goal_amount : null,
+    current_amount : null,
+    start_date : new Date(),
+    end_date : null,
+    status: 'ACTIVA',
+    priority:'MEDIA',
+    district_id : null,
+    cause_id :null,
+    images: []
 });
 
 const createCampaign = () => {
-    // form.post(route("campaign.store"), {
-    //     preserveScroll: true,
-    //     onSuccess: () => {
-    //         form.reset();
-    //         closeCreateCampaignModal();
-    //     },
-    //     onError: () => titleInput.value.focus(),
-    //     onFinish: () => form.reset(),
-    // });
+    form.post(route("campaign.store"), {
+        preserveScroll: true,
+        onSuccess: () => {
+            form.reset();
+            closeCreateCampaignModal();
+        },
+        onError: () => titleInput.value.focus(),
+    });
 };
 </script>
 <template>
@@ -51,7 +81,7 @@ const createCampaign = () => {
         <span class="mx-4">Nova campanha</span>
     </button>
 
-    <Modal :show="addCampaign" @close="closeCreateCampaignModal">
+    <Modal max-width="4xl" :show="addCampaign" @close="closeCreateCampaignModal" >
         <div class="relative bg-white rounded shadow dark:bg-gray-700">
             <button
                 type="button"
@@ -79,8 +109,8 @@ const createCampaign = () => {
                 >
                     Nova campanha
                 </h3>
-                <form class="space-y-6" @submit.prevent="createCampaign">
-                    <div>
+                <div class="grid grid-cols-2 gap-6 gap-y-4">
+                    <div class="col-span-2">
                         <label
                             for="name"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -97,31 +127,185 @@ const createCampaign = () => {
                         />
                         <span class="text-medium text-red-500 font-semibold">{{form.errors.title}}</span>
                     </div>
-
-                    <div>
+                    <div class="col-span-2">
+                        <ImageUploader
+                            @update:images="(files : any) => form.images = files"
+                            :multiple="false"
+                            :disabledUpload="true"
+                            :disabledCancel="true"
+                            mediaType="image/*,video/*"
+                            labelText="Carregar media (Video,Imagem)"
+                        />
+                        <span class="text-medium text-red-500 font-semibold">{{form.errors.images}}</span>
+                    </div>
+                    <div class="col-span-2">
                         <label
                             for="name"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                         >Descrição da campanha</label
                         >
-                        <textarea
-                            name="description"
-                            v-model="form.description"
-                            ref="descriptionInput"
-                            id="description"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                            placeholder="Descrição da campanha"
-                        />
+                        <div class="grow">
+                            <quill-editor
+                                contentType="html"
+                                toolbar="minimal"
+                                v-model:content="form.description"
+                                theme="snow"
+                                :options="{
+                                placeholder : 'Descrição da campanha'
+                            }"
+                            ></quill-editor>
+                        </div>
                         <span class="text-medium text-red-500 font-semibold">{{form.errors.description}}</span>
                     </div>
+                    <div>
+                        <label
+                            for="name"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Meta da campanha</label
+                        >
+                        <input
+                            type="number"
+                            name="goal_amount"
+                            v-model="form.goal_amount"
+                            v-maska
+                            data-maska="0.99"
+                            data-maska-tokens="0:\d:multiple|9:\d:optional"
+                            ref="goalAmountInput"
+                            id="goal_amount"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="Meta da campanha"
+                        />
+                        <span class="text-medium text-red-500 font-semibold">{{form.errors.goal_amount}}</span>
+                    </div>
+                    <div>
+                        <label
+                            for="name"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Valor corrente</label
+                        >
+                        <input
+                            type="number"
+                            name="current_amount"
+                            v-model="form.current_amount"
+                            v-maska
+                            data-maska="0.99"
+                            data-maska-tokens="0:\d:multiple|9:\d:optional"
+
+                            id="current_amount"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="Valor corrente"
+                        />
+                        <span class="text-medium text-red-500 font-semibold">{{form.errors.current_amount}}</span>
+                    </div>
+                    <div>
+                        <label
+                            for="name"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Data de início</label
+                        >
+                        <VueDatePicker
+                            :min-date="new Date()"
+                            v-model="form.start_date"
+                            :enable-time-picker="false"
+                            auto-apply
+                            :teleport="true"
+                            format="dd/MM/yyyy"
+                            :text-input="{
+                                format: 'dd.MM.yyyy',
+                            }"
+                            class="relative"
+                            placeholder="Data de início"
+                        />
+                        <span class="text-medium text-red-500 font-semibold">{{form.errors.start_date}}</span>
+                    </div>
+                    <div>
+                        <label
+                            for="name"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Data do término</label
+                        >
+                        <VueDatePicker
+                            :min-date="new Date()"
+                            v-model="form.end_date"
+                            :enable-time-picker="false"
+                            auto-apply
+                            :teleport="true"
+                            format="dd/MM/yyyy"
+                            :text-input="{
+                                format: 'dd.MM.yyyy',
+                            }"
+                            class="relative"
+                            placeholder="Data do término"
+                        />
+                        <span class="text-medium text-red-500 font-semibold">{{form.errors.end_date}}</span>
+                    </div>
+                    <div>
+                        <label
+                            for="name"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Estado da campanha</label
+                        >
+                        <v-select
+                            v-model="form.status"
+
+                            :options="statuses"
+                            placeholder="Estado da campanha"
+                        ></v-select>
+                        <span class="text-medium text-red-500 font-semibold">{{form.errors.status}}</span>
+                    </div>
+                    <div>
+                        <label
+                            for="priority"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Prioridade da campanha</label
+                        >
+                        <v-select
+                            v-model="form.priority"
+
+                            :options="priorities"
+                            placeholder="Prioridade da campanha"
+                        ></v-select>
+                        <span class="text-medium text-red-500 font-semibold">{{form.errors.priority}}</span>
+                    </div>
+                    <div>
+                        <label
+                            for="cause"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Causa da campanha</label
+                        >
+                        <v-select
+                            v-model="form.cause_id"
+                            label="title"
+                            :options="causes"
+                            :reduce="(e) => e.id"
+                            placeholder="Causa da campanha"
+                        ></v-select>
+                        <span class="text-medium text-red-500 font-semibold">{{form.errors.cause_id}}</span>
+                    </div>
+                    <div>
+                        <label
+                            for="priority"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Distrito</label
+                        >
+                        <v-select
+                            v-model="form.district_id"
+                            label="name"
+                            :options="districts"
+                            :reduce="(e) => e.id"
+                            placeholder="Distrito"
+                        ></v-select>
+                        <span class="text-medium text-red-500 font-semibold">{{form.errors.district_id}}</span>
+                    </div>
+
 
                     <button
-                        type="submit"
-                        class="w-full text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"
+                        @click="createCampaign"
+                        class="col-span-2 w-full text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"
                     >
                         Salvar
                     </button>
-                </form>
+                </div>
             </div>
         </div>
     </Modal>

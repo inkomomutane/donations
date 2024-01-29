@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Campaign\StoreCampaignController;
 use App\Http\Controllers\District\CreateDistrict;
 use App\Http\Controllers\District\DeleteDistrict;
 use App\Http\Controllers\District\GetDistricts;
@@ -29,9 +30,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',\App\Http\Controllers\Campaign\GetCampaignsController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -68,6 +67,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/district/store', CreateDistrict::class)->name('district.store');
     Route::match(['put','patch'],'/district/{district}/update', UpdateDistrict::class)->name('district.update');
     Route::delete('/district/{district}/delete', DeleteDistrict::class)->name('district.delete');
+
+    #--- Campaign routes --#
+
+    Route::post('/campaign/store', StoreCampaignController::class)->name('campaign.store');
 });
 
 

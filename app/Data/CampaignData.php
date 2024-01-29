@@ -22,7 +22,7 @@ class CampaignData extends Data
         public readonly  ?string $endDate,
         public readonly  CampaignEnum $status,
         public readonly  CampaignPriorityEnum $priority,
-        public readonly  Lazy|null|ProvinceData $province,
+        public readonly  Lazy|null|DistrictData $district,
         public readonly  Lazy|null|CauseData $cause,
         public readonly  ?string $postedAt,
         public readonly  Lazy|null|UserData $postedBy,
@@ -40,8 +40,8 @@ class CampaignData extends Data
             endDate: $campaign->end_date ? $campaign->end_date->format('Y-m-d') : null,
             status: $campaign->status,
             priority: $campaign->priority,
-            province: Lazy::whenLoaded('province',$campaign, static fn() => $campaign->province->getData()),
-            cause: Lazy::whenLoaded('cause',$campaign,static fn() => $campaign->province->getData()),
+            district: Lazy::whenLoaded('district',$campaign, static fn() => $campaign->district->getData()),
+            cause: Lazy::whenLoaded('cause',$campaign,static fn() => $campaign->cause->getData()),
             postedAt: $campaign->posted_at ? $campaign->posted_at->format('Y-m-d') : null,
             postedBy:Lazy::whenLoaded('postedBy',$campaign,static fn() => $campaign->postedBy->getData()
             )

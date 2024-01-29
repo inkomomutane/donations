@@ -4,10 +4,10 @@ namespace App\Enums;
 
 use Spatie\Enum\Laravel\Enum;
 /**
- * @method static self ACTIVE()
- * @method static self PENDING()
- * @method static self COMPLETED()
- * @method static self SUSPENDED()
+ * @method static self ACTIVA()
+ * @method static self PENDENTE()
+ * @method static self COMPLETA()
+ * @method static self SUSPENSA()
  * @typescript
  * @typescript-transformer \Spatie\TypeScriptTransformer\Transformers\SpatieEnumTransformer::class
  */

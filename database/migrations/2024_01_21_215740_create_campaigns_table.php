@@ -17,9 +17,8 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->string('title');
             $table->text('description');
-            $table->json('content');
-            $table->unsignedBigInteger('goal_amount');
-            $table->unsignedBigInteger('current_amount')->default(0);
+            $table->unsignedFloat('goal_amount',30, 6);
+            $table->unsignedFloat('current_amount',30,6)->default(0);
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->enum('status', CampaignEnum::toValues());
