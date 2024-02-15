@@ -37,6 +37,7 @@
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.0.0",
         "collect.js": "^4.36.1",
+        "flowbite": "^2.3.0",
         "lucide-vue-next": "^0.301.0",
         "maska": "^2.1.11",
         "primevue": "^3.47.2",

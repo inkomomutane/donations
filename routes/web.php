@@ -1,11 +1,13 @@
 <?php
 
+use App\Data\CampaignData;
 use App\Http\Controllers\Campaign\StoreCampaignController;
 use App\Http\Controllers\District\CreateDistrict;
 use App\Http\Controllers\District\DeleteDistrict;
 use App\Http\Controllers\District\GetDistricts;
 use App\Http\Controllers\District\UpdateDistrict;
 use App\Http\Controllers\ProfileController;
+use App\Models\Campaign;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,13 +24,16 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    $campaigns = Campaign::paginate(12);
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'campaigns' => CampaignData::collection($campaigns),
+        'causes' => \App\Data\CauseData::collection(\App\Models\Cause::all()),
     ]);
-});
+})->name('welcome');
 
 Route::get('/dashboard',\App\Http\Controllers\Campaign\GetCampaignsController::class)->middleware(['auth', 'verified'])->name('dashboard');
 

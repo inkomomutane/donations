@@ -45,21 +45,30 @@ const props =  defineProps({
             <div>
                 <main class="py-6 px-4 sm:p-6 md:py-10 md:px-8 grid grid-cols-4 gap-8" >
                     <article v-for="campaign in campaigns.data"
-                        class="!w-full rounded-3xl bg-white dark:bg-gray-700  dark:border-gray-700 transition-transform duration-300 transform-gpu hover:scale-105 hover:shadow-none hover:shadow-gray-400">
+                        class="!w-full rounded-3xl rounded-b-xl bg-white dark:bg-gray-700  dark:border-gray-700 transition-transform duration-300 transform-gpu hover:scale-105 hover:shadow-none hover:shadow-gray-400">
 
-                        <header class="rounded-3xl">
-
-                                <img class="col-span-1 sm:col-span-3  h-72 sm:h-40 md:h-64 object-cover rounded-3xl w-full rounded-b-md"
+                        <header class="rounded-t-xl">
+                                <img v-if="campaign.media.type === null" class="col-span-1 sm:col-span-3  h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full "
                                      src="https://placehold.co/600x400"
                                     >
+                                <img v-else-if="campaign.media.type === 'image'" class="col-span-1 sm:col-span-3  h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full "
+                                     :src="campaign.media.url"
+                                    >
+                                <video v-else-if="campaign.media.type === 'video'" class="col-span-1 sm:col-span-3  h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full "
+                                       :src="campaign.media.url"
+                                       controls
+                                    >
+                                    </video>
                         </header>
 
-                        <div class="w-full p-4 pb-6 font-['Jost'] text-gray-500 grid justify-items-stretch col-span-3">
+                        <div class="w-full p-4 pb-6 text-gray-500 grid justify-items-stretch col-span-3">
                             <div class="flex justify-between">
-                                <h1 class="text-lg font-semibold line-clamp-1 normal-case py-1 first-letter:uppercase">
+                                <h1 class="text-lg font-['Lato'] font-semibold line-clamp-2 py-1 uppercase first-letter:uppercase">
                                     {{ campaign.title }}
                                 </h1>
                             </div>
+                            <div class="line-clamp-2 pb-2 text-sm" v-html="campaign.description">
+                              </div>
 
                             <div class="flex mb-1 font-normal text-sm text-gray-700 dark:text-gray-400 line-clamp-1"
                                  itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
@@ -79,14 +88,26 @@ const props =  defineProps({
                                 </p>
 
                             </div>
-                            <div class="grid grid-cols-3 gap-8 mt-2">
+                            <div class="flex  gap-2 mt-2 font-black">
+                                <div class="flex text-center font-['Roboto'] text-gray-50 bg-blue-600 rounded-sm  p-1 px-2">
+                                    <small class="font-black">Meta:&nbsp;{{ campaign.goalAmount ?? 0 }} </small>
+                                </div>
 
+                                <div class="flex text-center font-['Roboto'] text-gray-50 bg-green-600 rounded-sm  p-1 px-2">
+                                    <small class="font-black">Total:&nbsp;{{ campaign.goalAmount ?? 0 }} </small>
+                                </div>
+                                <div :class="{
+                                    'bg-red-600' : campaign.status === 'SUSPENSA',
+                                    'bg-yellow-600' : campaign.status === 'PENDENTE',
+                                    'bg-green-600' : campaign.status === 'COMPLETA',
+                                    'bg-gray-600' : campaign.status === 'ACTIVA',
 
-                                <div class="my-2 flex text-gray-500 col-span-2">
-                                    &nbsp; <strong>58</strong>
+                                }" class="flex text-center font-['Roboto'] text-gray-50  rounded-sm  p-1 px-2">
+                                    <small class="font-black">
+                                       Status:  {{ campaign.status }}
+                                    </small>
                                 </div>
                             </div>
-
                         </div>
                     </article>
                 </main>

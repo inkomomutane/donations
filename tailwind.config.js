@@ -9,6 +9,7 @@ module.exports = {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.{js,ts,tsx,vue}',
+        "./node_modules/flowbite/**/*.js"
 
     ],
     theme: {
@@ -21,7 +22,7 @@ module.exports = {
         },
         extend: {
             fontFamily: {
-                sans: ['Lato', ...defaultTheme.fontFamily.sans],
+                sans: ['Lato','Allerta Stencil', ...defaultTheme.fontFamily.sans],
             },
             keyframes: {
                 "accordion-down": {
@@ -40,6 +41,7 @@ module.exports = {
         },
     },
     plugins: [animate,
+        require('flowbite/plugin'),
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio')]

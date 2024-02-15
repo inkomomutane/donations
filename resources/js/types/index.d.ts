@@ -38,6 +38,10 @@ export interface Districts extends Omit<PaginatedData, "data"> {
     data: Array<App.Data.DistrictData>;
 }
 
+export interface Campaigns extends Omit<PaginatedData, "data"> {
+    data: Array<App.Data.CampaignData>;
+}
+
 export interface User {
     id: number;
     name: string;

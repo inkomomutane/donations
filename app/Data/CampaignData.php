@@ -5,8 +5,10 @@ namespace App\Data;
 use App\Enums\CampaignEnum;
 use App\Enums\CampaignPriorityEnum;
 use App\Models\Campaign;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Lazy;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /** @typescript */
 class CampaignData extends Data
@@ -26,9 +28,17 @@ class CampaignData extends Data
         public readonly  Lazy|null|CauseData $cause,
         public readonly  ?string $postedAt,
         public readonly  Lazy|null|UserData $postedBy,
+        public readonly  Lazy|null|MediaData $media
     ) {}
 
     public static function fromModel(Campaign $campaign) :self{
+
+        $campaign->loadMissing(['district','cause','postedBy','media' =>  function(MorphMany $morphMany){
+            $morphMany->where('collection_name','=','campaigns')->get();
+        }]);
+
+
+
         return new self(
             id: $campaign->id,
             title: $campaign->title,
@@ -44,7 +54,10 @@ class CampaignData extends Data
             cause: Lazy::whenLoaded('cause',$campaign,static fn() => $campaign->cause->getData()),
             postedAt: $campaign->posted_at ? $campaign->posted_at->format('Y-m-d') : null,
             postedBy:Lazy::whenLoaded('postedBy',$campaign,static fn() => $campaign->postedBy->getData()
-            )
+            ),
+            media:MediaData::fromModel($campaign->getFirstMedia('campaigns'))
+
         );
     }
+
 }
