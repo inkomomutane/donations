@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Campaign;
 use App\Models\Cause;
 use App\Models\District;
 use App\Models\Province;
@@ -44,5 +45,9 @@ class DatabaseSeeder extends Seeder
              'title' => 'Apoio',
               'description' => 'Apoio'
          ]);
+
+         Campaign::factory(10)->create()->each(
+             fn(Campaign $campaign) => $campaign->addMediaFromUrl('https://source.unsplash.com/random')
+             ->toMediaCollection('images'));
     }
 }

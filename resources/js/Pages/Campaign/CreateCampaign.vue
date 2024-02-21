@@ -4,26 +4,26 @@ import ImageUploader from "@components/ImageUploader.vue";
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
-import { vMaska } from "maska"
+import { vMaska } from "maska";
 
-const props =  defineProps({
-    causes : {
-        type : Array<App.Data.CauseData>,
-        required : true
+const props = defineProps({
+    causes: {
+        type: Array<App.Data.CauseData>,
+        required: true,
     },
-    districts : {
-        type : Array<App.Data.DistrictData>,
-        required : true
+    districts: {
+        type: Array<App.Data.DistrictData>,
+        required: true,
     },
-    priorities : {
-        type : Array,
-        required : true
+    priorities: {
+        type: Array,
+        required: true,
     },
-    statuses : {
-        type : Array,
-        required : true
-    }
-})
+    statuses: {
+        type: Array,
+        required: true,
+    },
+});
 
 const addCampaign = ref(false);
 const titleInput = ref();
@@ -39,15 +39,15 @@ const form = useForm({
     title: "",
     description: "",
     content: "",
-    goal_amount : null,
-    current_amount : null,
-    start_date : new Date(),
-    end_date : null,
-    status: 'ACTIVA',
-    priority:'MEDIA',
-    district_id : null,
-    cause_id :null,
-    images: []
+    goal_amount: null,
+    current_amount: null,
+    start_date: new Date(),
+    end_date: null,
+    status: "ACTIVA",
+    priority: "MEDIA",
+    district_id: null,
+    cause_id: null,
+    images: [],
 });
 
 const createCampaign = () => {
@@ -81,7 +81,11 @@ const createCampaign = () => {
         <span class="mx-4">Nova campanha</span>
     </button>
 
-    <Modal max-width="4xl" :show="addCampaign" @close="closeCreateCampaignModal" >
+    <Modal
+        max-width="4xl"
+        :show="addCampaign"
+        @close="closeCreateCampaignModal"
+    >
         <div class="relative bg-white rounded shadow dark:bg-gray-700">
             <button
                 type="button"
@@ -114,7 +118,7 @@ const createCampaign = () => {
                         <label
                             for="name"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >Título da campanha</label
+                            >Título da campanha</label
                         >
                         <input
                             type="text"
@@ -125,24 +129,30 @@ const createCampaign = () => {
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Nome da campanha"
                         />
-                        <span class="text-medium text-red-500 font-semibold">{{form.errors.title}}</span>
+                        <span class="text-medium text-red-500 font-semibold">{{
+                            form.errors.title
+                        }}</span>
                     </div>
                     <div class="col-span-2">
                         <ImageUploader
-                            @update:images="(files : any) => form.images = files"
+                            @update:images="
+                                (files: any) => (form.images = files)
+                            "
                             :multiple="false"
                             :disabledUpload="true"
                             :disabledCancel="true"
                             mediaType="image/*,video/*"
                             labelText="Carregar media (Video,Imagem)"
                         />
-                        <span class="text-medium text-red-500 font-semibold">{{form.errors.images}}</span>
+                        <span class="text-medium text-red-500 font-semibold">{{
+                            form.errors.images
+                        }}</span>
                     </div>
                     <div class="col-span-2">
                         <label
                             for="name"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >Descrição da campanha</label
+                            >Descrição da campanha</label
                         >
                         <div class="grow">
                             <quill-editor
@@ -151,17 +161,19 @@ const createCampaign = () => {
                                 v-model:content="form.description"
                                 theme="snow"
                                 :options="{
-                                placeholder : 'Descrição da campanha'
-                            }"
+                                    placeholder: 'Descrição da campanha',
+                                }"
                             ></quill-editor>
                         </div>
-                        <span class="text-medium text-red-500 font-semibold">{{form.errors.description}}</span>
+                        <span class="text-medium text-red-500 font-semibold">{{
+                            form.errors.description
+                        }}</span>
                     </div>
                     <div>
                         <label
                             for="name"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >Meta da campanha</label
+                            >Meta da campanha</label
                         >
                         <input
                             type="number"
@@ -175,13 +187,15 @@ const createCampaign = () => {
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Meta da campanha"
                         />
-                        <span class="text-medium text-red-500 font-semibold">{{form.errors.goal_amount}}</span>
+                        <span class="text-medium text-red-500 font-semibold">{{
+                            form.errors.goal_amount
+                        }}</span>
                     </div>
                     <div>
                         <label
                             for="name"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >Valor corrente</label
+                            >Valor corrente</label
                         >
                         <input
                             type="number"
@@ -190,18 +204,19 @@ const createCampaign = () => {
                             v-maska
                             data-maska="0.99"
                             data-maska-tokens="0:\d:multiple|9:\d:optional"
-
                             id="current_amount"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Valor corrente"
                         />
-                        <span class="text-medium text-red-500 font-semibold">{{form.errors.current_amount}}</span>
+                        <span class="text-medium text-red-500 font-semibold">{{
+                            form.errors.current_amount
+                        }}</span>
                     </div>
                     <div>
                         <label
                             for="name"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >Data de início</label
+                            >Data de início</label
                         >
                         <VueDatePicker
                             :min-date="new Date()"
@@ -216,13 +231,15 @@ const createCampaign = () => {
                             class="relative"
                             placeholder="Data de início"
                         />
-                        <span class="text-medium text-red-500 font-semibold">{{form.errors.start_date}}</span>
+                        <span class="text-medium text-red-500 font-semibold">{{
+                            form.errors.start_date
+                        }}</span>
                     </div>
                     <div>
                         <label
                             for="name"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >Data do término</label
+                            >Data do término</label
                         >
                         <VueDatePicker
                             :min-date="new Date()"
@@ -237,41 +254,45 @@ const createCampaign = () => {
                             class="relative"
                             placeholder="Data do término"
                         />
-                        <span class="text-medium text-red-500 font-semibold">{{form.errors.end_date}}</span>
+                        <span class="text-medium text-red-500 font-semibold">{{
+                            form.errors.end_date
+                        }}</span>
                     </div>
                     <div>
                         <label
                             for="name"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >Estado da campanha</label
+                            >Estado da campanha</label
                         >
                         <v-select
                             v-model="form.status"
-
                             :options="statuses"
                             placeholder="Estado da campanha"
                         ></v-select>
-                        <span class="text-medium text-red-500 font-semibold">{{form.errors.status}}</span>
+                        <span class="text-medium text-red-500 font-semibold">{{
+                            form.errors.status
+                        }}</span>
                     </div>
                     <div>
                         <label
                             for="priority"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >Prioridade da campanha</label
+                            >Prioridade da campanha</label
                         >
                         <v-select
                             v-model="form.priority"
-
                             :options="priorities"
                             placeholder="Prioridade da campanha"
                         ></v-select>
-                        <span class="text-medium text-red-500 font-semibold">{{form.errors.priority}}</span>
+                        <span class="text-medium text-red-500 font-semibold">{{
+                            form.errors.priority
+                        }}</span>
                     </div>
                     <div>
                         <label
                             for="cause"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >Causa da campanha</label
+                            >Causa da campanha</label
                         >
                         <v-select
                             v-model="form.cause_id"
@@ -280,13 +301,15 @@ const createCampaign = () => {
                             :reduce="(e) => e.id"
                             placeholder="Causa da campanha"
                         ></v-select>
-                        <span class="text-medium text-red-500 font-semibold">{{form.errors.cause_id}}</span>
+                        <span class="text-medium text-red-500 font-semibold">{{
+                            form.errors.cause_id
+                        }}</span>
                     </div>
                     <div>
                         <label
                             for="priority"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >Distrito</label
+                            >Distrito</label
                         >
                         <v-select
                             v-model="form.district_id"
@@ -295,10 +318,10 @@ const createCampaign = () => {
                             :reduce="(e) => e.id"
                             placeholder="Distrito"
                         ></v-select>
-                        <span class="text-medium text-red-500 font-semibold">{{form.errors.district_id}}</span>
+                        <span class="text-medium text-red-500 font-semibold">{{
+                            form.errors.district_id
+                        }}</span>
                     </div>
-
-
                     <button
                         @click="createCampaign"
                         class="col-span-2 w-full text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"

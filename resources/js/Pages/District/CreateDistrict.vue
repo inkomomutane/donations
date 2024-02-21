@@ -172,9 +172,8 @@ const createCity = () => {
                             v-model="form.province_id"
                             :options="provinces"
                             :reduce="
-                                    (province: App.Data.ProvinceData) =>
-                                        province.id
-                                "
+                                (province: App.Data.ProvinceData) => province.id
+                            "
                             label="name"
                             placeholder="Província"
                         ></v-select>

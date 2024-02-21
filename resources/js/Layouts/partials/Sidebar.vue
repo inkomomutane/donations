@@ -30,7 +30,9 @@ const inactiveClass = ref(
             <div class="flex items-start justify-start mt-8 ml-3">
                 <Link href="/" class="flex items-center">
                     <img :src="logo" class="w-12" />
-                    <span class="text-white text-2xl font-bold mx-2">Donations</span>
+                    <span class="text-white text-2xl font-bold mx-2"
+                        >Donations</span
+                    >
                 </Link>
             </div>
 
@@ -44,9 +46,22 @@ const inactiveClass = ref(
                     ]"
                     :href="route('dashboard')"
                 >
-                    <svg class="w-5 h-5" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.0313 7C11.8117 7 8 12.4529 8 18.3333C8 19.9137 8.24643 21.4257 8.67984 22.8627C8.89182 23.5656 9.14855 24.2506 9.44308 24.9169C13.5487 34.2045 25 39.8666 25 39.8666C25 39.8666 27.533 38.5335 30.6436 36.1725C28.6744 34.7809 25.9501 32.4265 24.6363 29.3519C24.4792 28.9843 24.3423 28.6063 24.2292 28.2185C23.9981 27.4257 23.8667 26.5914 23.8667 25.7195C23.8667 22.4752 25.8996 19.4667 28.6833 19.4667C30.6151 19.4667 32.0485 20.8165 32.9333 22.7313C33.8181 20.8166 35.2515 19.4667 37.1833 19.4667C39.0246 19.4667 40.5372 20.7828 41.3505 22.6125C41.7651 21.2422 42 19.8129 42 18.3333C42 12.4538 38.1889 7 32.9687 7C29.3466 7 26.6589 9.44674 25 12.9171C23.341 9.44652 20.6533 7 17.0313 7Z" fill="currentColor"></path>
-                        <path d="M40.4556 25.1013C41.0815 25.1099 41.5819 25.6243 41.5733 26.2502C41.5222 29.9615 39.7276 32.4863 37.9844 34.0517C37.1167 34.8309 36.2553 35.3801 35.6099 35.7356C35.2862 35.914 35.0138 36.0452 34.818 36.1335C34.72 36.1777 34.6409 36.2113 34.5839 36.2348C34.5553 36.2465 34.5323 36.2557 34.5151 36.2625L34.4937 36.2708L34.4865 36.2736L34.4825 36.2751C33.8966 36.4954 33.2421 36.1994 33.0218 35.6135C32.8018 35.0287 33.0968 34.3764 33.6806 34.155L33.686 34.1529C33.6926 34.1503 33.7047 34.1455 33.7221 34.1383C33.7569 34.124 33.8125 34.1005 33.886 34.0673C34.0333 34.0009 34.2511 33.8963 34.5163 33.7503C35.0487 33.457 35.7595 33.0032 36.4699 32.3653C37.8826 31.0966 39.2667 29.1313 39.3068 26.219C39.3154 25.5931 39.8298 25.0927 40.4556 25.1013Z" fill="currentColor"></path>
+                    <svg
+                        class="w-5 h-5"
+                        width="48"
+                        height="48"
+                        viewBox="0 0 48 48"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M17.0313 7C11.8117 7 8 12.4529 8 18.3333C8 19.9137 8.24643 21.4257 8.67984 22.8627C8.89182 23.5656 9.14855 24.2506 9.44308 24.9169C13.5487 34.2045 25 39.8666 25 39.8666C25 39.8666 27.533 38.5335 30.6436 36.1725C28.6744 34.7809 25.9501 32.4265 24.6363 29.3519C24.4792 28.9843 24.3423 28.6063 24.2292 28.2185C23.9981 27.4257 23.8667 26.5914 23.8667 25.7195C23.8667 22.4752 25.8996 19.4667 28.6833 19.4667C30.6151 19.4667 32.0485 20.8165 32.9333 22.7313C33.8181 20.8166 35.2515 19.4667 37.1833 19.4667C39.0246 19.4667 40.5372 20.7828 41.3505 22.6125C41.7651 21.2422 42 19.8129 42 18.3333C42 12.4538 38.1889 7 32.9687 7C29.3466 7 26.6589 9.44674 25 12.9171C23.341 9.44652 20.6533 7 17.0313 7Z"
+                            fill="currentColor"
+                        ></path>
+                        <path
+                            d="M40.4556 25.1013C41.0815 25.1099 41.5819 25.6243 41.5733 26.2502C41.5222 29.9615 39.7276 32.4863 37.9844 34.0517C37.1167 34.8309 36.2553 35.3801 35.6099 35.7356C35.2862 35.914 35.0138 36.0452 34.818 36.1335C34.72 36.1777 34.6409 36.2113 34.5839 36.2348C34.5553 36.2465 34.5323 36.2557 34.5151 36.2625L34.4937 36.2708L34.4865 36.2736L34.4825 36.2751C33.8966 36.4954 33.2421 36.1994 33.0218 35.6135C32.8018 35.0287 33.0968 34.3764 33.6806 34.155L33.686 34.1529C33.6926 34.1503 33.7047 34.1455 33.7221 34.1383C33.7569 34.124 33.8125 34.1005 33.886 34.0673C34.0333 34.0009 34.2511 33.8963 34.5163 33.7503C35.0487 33.457 35.7595 33.0032 36.4699 32.3653C37.8826 31.0966 39.2667 29.1313 39.3068 26.219C39.3154 25.5931 39.8298 25.0927 40.4556 25.1013Z"
+                            fill="currentColor"
+                        ></path>
                     </svg>
 
                     <span class="mx-4 font-bold text-base">Campanhas</span>
@@ -124,7 +139,69 @@ const inactiveClass = ref(
                     ]"
                     :href="route('district.list')"
                 >
-                    <svg width="24" height="24" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path class="fill-current text-gray-100" fill-rule="evenodd" clip-rule="evenodd" d="M8 43C8 42.4477 8.44772 42 9 42H39C39.5523 42 40 42.4477 40 43C40 43.5523 39.5523 44 39 44H9C8.44772 44 8 43.5523 8 43Z"></path><path class="fill-current text-gray-100" fill-rule="evenodd" clip-rule="evenodd" d="M12 22V42H17V22H12ZM11 20C10.4477 20 10 20.4477 10 21V43C10 43.5523 10.4477 44 11 44H18C18.5523 44 19 43.5523 19 43V21C19 20.4477 18.5523 20 18 20H11Z"></path><path class="fill-current text-gray-100" opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M17 4L33 10V24H28C27.4477 24 27 24.4477 27 25V42H17V4ZM20 13H22V15H20V13ZM26 13H24V15H26V13ZM28 13H30V15H28V13ZM22 17H20V19H22V17ZM24 17H26V19H24V17ZM30 17H28V19H30V17ZM20 21H22V23H20V21ZM26 21H24V23H26V21ZM28 21H30V23H28V21ZM22 25H20V27H22V25ZM24 25H26V27H24V25ZM20 29H22V31H20V29ZM26 29H24V31H26V29ZM22 33H20V35H22V33ZM24 33H26V35H24V33ZM20 37H22V39H20V37ZM26 37H24V39H26V37Z"></path><path class="fill-current text-gray-100" fill-rule="evenodd" clip-rule="evenodd" d="M29 26V42H36V26H29ZM28 24C27.4477 24 27 24.4477 27 25V43C27 43.5523 27.4477 44 28 44H37C37.5523 44 38 43.5523 38 43V25C38 24.4477 37.5523 24 37 24H28Z"></path><path class="fill-current text-gray-100" fill-rule="evenodd" clip-rule="evenodd" d="M34 30H31V28H34V30Z"></path><path class="fill-current text-gray-100" fill-rule="evenodd" clip-rule="evenodd" d="M34 34H31V32H34V34Z"></path><path class="fill-current text-gray-100" fill-rule="evenodd" clip-rule="evenodd" d="M34 38H31V36H34V38Z"></path><path class="fill-current text-gray-100" fill-rule="evenodd" clip-rule="evenodd" d="M34 42H31V40H34V42Z"></path><path class="fill-current text-gray-100" fill-rule="evenodd" clip-rule="evenodd" d="M15 13L15 21H13L13 13H15Z"></path></svg>
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 48 48"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            class="fill-current text-gray-100"
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M8 43C8 42.4477 8.44772 42 9 42H39C39.5523 42 40 42.4477 40 43C40 43.5523 39.5523 44 39 44H9C8.44772 44 8 43.5523 8 43Z"
+                        ></path>
+                        <path
+                            class="fill-current text-gray-100"
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M12 22V42H17V22H12ZM11 20C10.4477 20 10 20.4477 10 21V43C10 43.5523 10.4477 44 11 44H18C18.5523 44 19 43.5523 19 43V21C19 20.4477 18.5523 20 18 20H11Z"
+                        ></path>
+                        <path
+                            class="fill-current text-gray-100"
+                            opacity="0.5"
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M17 4L33 10V24H28C27.4477 24 27 24.4477 27 25V42H17V4ZM20 13H22V15H20V13ZM26 13H24V15H26V13ZM28 13H30V15H28V13ZM22 17H20V19H22V17ZM24 17H26V19H24V17ZM30 17H28V19H30V17ZM20 21H22V23H20V21ZM26 21H24V23H26V21ZM28 21H30V23H28V21ZM22 25H20V27H22V25ZM24 25H26V27H24V25ZM20 29H22V31H20V29ZM26 29H24V31H26V29ZM22 33H20V35H22V33ZM24 33H26V35H24V33ZM20 37H22V39H20V37ZM26 37H24V39H26V37Z"
+                        ></path>
+                        <path
+                            class="fill-current text-gray-100"
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M29 26V42H36V26H29ZM28 24C27.4477 24 27 24.4477 27 25V43C27 43.5523 27.4477 44 28 44H37C37.5523 44 38 43.5523 38 43V25C38 24.4477 37.5523 24 37 24H28Z"
+                        ></path>
+                        <path
+                            class="fill-current text-gray-100"
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M34 30H31V28H34V30Z"
+                        ></path>
+                        <path
+                            class="fill-current text-gray-100"
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M34 34H31V32H34V34Z"
+                        ></path>
+                        <path
+                            class="fill-current text-gray-100"
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M34 38H31V36H34V38Z"
+                        ></path>
+                        <path
+                            class="fill-current text-gray-100"
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M34 42H31V40H34V42Z"
+                        ></path>
+                        <path
+                            class="fill-current text-gray-100"
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M15 13L15 21H13L13 13H15Z"
+                        ></path>
+                    </svg>
 
                     <span class="mx-4 font-bold text-base">Distritos</span>
                 </Link>

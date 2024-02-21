@@ -22,7 +22,7 @@ module.exports = {
         },
         extend: {
             fontFamily: {
-                sans: ['Lato','Allerta Stencil', ...defaultTheme.fontFamily.sans],
+                sans: ['Lato','Allerta Stencil','Anta','Lexend Deca', 'Black Ravens', ...defaultTheme.fontFamily.sans],
             },
             keyframes: {
                 "accordion-down": {
@@ -40,9 +40,11 @@ module.exports = {
             },
         },
     },
-    plugins: [animate,
+    plugins: [
+        animate,
         require('flowbite/plugin'),
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
-        require('@tailwindcss/aspect-ratio')]
+        require('@tailwindcss/aspect-ratio')
+    ]
 }

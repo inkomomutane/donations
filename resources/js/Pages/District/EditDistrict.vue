@@ -43,7 +43,7 @@ const updateDistrict = () => {
             },
             onError: () => nomeInput.value.focus(),
             onFinish: () => form.reset(),
-        }
+        },
     );
 };
 </script>
@@ -106,9 +106,8 @@ const updateDistrict = () => {
                             v-model="form.province_id"
                             :options="provinces"
                             :reduce="
-                                    (province: App.Data.ProvinceData) =>
-                                        province.id
-                                "
+                                (province: App.Data.ProvinceData) => province.id
+                            "
                             label="name"
                             placeholder="Província"
                         ></v-select>

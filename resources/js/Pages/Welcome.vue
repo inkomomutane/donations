@@ -1,142 +1,560 @@
 <script setup lang="ts">
 import { Head, Link } from "@inertiajs/vue3";
 import Dashboard from "./Dashboard.vue";
-import {Campaigns} from "@/types";
-const props =
-defineProps<{
+import { Campaigns } from "@/types";
+import { defineProps, PropType } from "vue";
+import CampaignData = App.Data.CampaignData;
+import Header from "@/Pages/Website/Header.vue";
+const props = defineProps<{
     canLogin?: boolean;
     canRegister?: boolean;
     laravelVersion: string;
     phpVersion: string;
-    campaigns: Array<Campaigns>;
-    causes : Array<App.Data.CauseData>;
+    campaigns: Object;
+    causes: Array<App.Data.CauseData>;
+    urgent_priority: Array<CampaignData>;
+    high_priority: Array<CampaignData>;
+    medium_priority: Array<CampaignData>;
+    low_priority: Array<CampaignData>;
 }>();
 </script>
 
 <template>
     <Head title="Welcome" />
 
-    <div class="sticky top-0 z-10">
-        <nav class="bg-white border-gray-200 dark:bg-gray-900 ">
-            <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-2xl p-4">
-                <a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Donations</span>
-                </a>
-                <div class="flex items-center space-x-6 rtl:space-x-reverse">
-                    <a href="tel:5541251234" class="text-sm  text-gray-500 dark:text-white hover:underline">(555) 412-1234</a>
-                    <a href="#" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>
-                </div>
-            </div>
-        </nav>
-        <nav class="bg-blue-500 dark:bg-gray-700">
-            <div class="max-w-screen-2xl px-4 py-3 mx-auto">
-                <div class="flex items-center">
-                    <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-                        <li>
-                            <Link href="/" :class="{
-                                'bg-white p-1.5 px-3 rounded-sm font-black   text-gray-900 dark:text-white' : route().current('welcome') ,
-                            }" class="text-gray-900 dark:text-white hover:underline">Todas causas</Link>
-                        </li>
-                        <li v-for="cause in causes">
-                            <a href="#" class="text-gray-900 dark:text-white hover:underline" aria-current="page">{{ cause.title }}</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-    </div>
+    <Header/>
 
     <div
-        class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white"
+        class="sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white"
     >
-        <div class=" mx-auto p-6 lg:p-8">
-
-            <div class="mt-16 mx-2 sm:px-4 md:px-8 lg:mx-auto max-w-screen-2xl">
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4  gap-6 lg:gap-8">
-                    <article v-for="campaign in campaigns.data"
-                             class="!w-full rounded-3xl rounded-b-xl bg-white dark:bg-gray-700  dark:border-gray-700 transition-transform duration-300 transform-gpu hover:scale-105 hover:shadow-none hover:shadow-gray-400">
-
-                        <header class="rounded-t-xl">
-                            <img v-if="campaign.media.type === null" class="col-span-1 sm:col-span-3  h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full "
-                                 src="https://placehold.co/600x400"
+        <div class="p-6 lg:p-8 max-w-screen-2xl">
+            <div class="mx-2 sm:px-4 md:px-8 w-full space-y-8">
+                <div>
+                    <div class="flex flex-row justify-between">
+                        <h5
+                            class="font-black font-['Roboto'] text-start self-start p-2"
+                        >
+                            — Campanhas de prioridade urgente
+                        </h5>
+                        <h6
+                            class="font-black font-['Roboto'] hover:text-blue-500 hover:bg-white p-2 hover:rounded-md inline-flex items-center px-4"
+                        >
+                            Ver todas
+                            <svg
+                                class="w-3 h-3 ml-2 -mr-1"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"
                             >
-                            <img v-else-if="campaign.media.type === 'image'" class="col-span-1 sm:col-span-3  h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full "
-                                 :src="campaign.media.url"
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"
+                                ></path>
+                            </svg>
+                        </h6>
+                    </div>
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8 my-8"
+                    >
+                        <article
+                            v-for="campaign in urgent_priority"
+                            :key="campaign.id"
+                            class="!w-full rounded-3xl rounded-b-xl bg-white dark:bg-gray-700 dark:border-gray-700 transition-transform duration-300 transform-gpu hover:scale-105 hover:shadow-none hover:shadow-gray-400"
+                        >
+                            <header class="rounded-t-xl">
+                                <img
+                                    v-if="!campaign.media?.type"
+                                    class="col-span-1 sm:col-span-3 h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full"
+                                    src="https://placehold.co/600x400"
+                                />
+                                <img
+                                    v-else-if="campaign.media.type === 'image'"
+                                    class="col-span-1 sm:col-span-3 h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full"
+                                    :src="campaign.media.url"
+                                />
+                                <video
+                                    v-else-if="campaign.media.type === 'video'"
+                                    class="col-span-1 sm:col-span-3 h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full"
+                                    :src="campaign.media.url"
+                                    controls
+                                ></video>
+                            </header>
+
+                            <div
+                                class="w-full p-4 pb-6 text-gray-500 grid justify-items-stretch col-span-3"
                             >
-                            <video v-else-if="campaign.media.type === 'video'" class="col-span-1 sm:col-span-3  h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full "
-                                   :src="campaign.media.url"
-                                   controls
+                                <div class="flex justify-between">
+                                    <h1
+                                        class="text-lg font-['Lato'] font-semibold line-clamp-2 py-1 uppercase first-letter:uppercase"
+                                    >
+                                        {{ campaign.title }}
+                                    </h1>
+                                </div>
+                                <div
+                                    class="line-clamp-2 pb-2 text-sm"
+                                    v-html="campaign.description"
+                                ></div>
+
+                                <div
+                                    class="flex mb-1 font-normal text-sm text-gray-700 dark:text-gray-400 line-clamp-1"
+                                    itemprop="address"
+                                    itemscope
+                                    itemtype="https://schema.org/PostalAddress"
+                                >
+                                    <svg
+                                        class="text-gray-400"
+                                        width="20"
+                                        height="20"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                    >
+                                        <circle
+                                            cx="12"
+                                            cy="10"
+                                            r="3"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></circle>
+                                        <path
+                                            d="M12 2C7.58172 2 4 5.58172 4 10C4 11.8919 4.40209 13.1304 5.5 14.5L12 22L18.5 14.5C19.5979 13.1304 20 11.8919 20 10C20 5.58172 16.4183 2 12 2Z"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></path>
+                                    </svg>
+                                    <p class="line-clamp-1">
+                                        &nbsp;
+                                        {{ campaign?.district?.name }}
+                                    </p>
+                                </div>
+                                <div class="flex gap-2 mt-2 font-black">
+                                    <div
+                                        class="flex text-center font-['Roboto'] text-gray-50 bg-blue-600 rounded-sm p-1 px-2"
+                                    >
+                                        <small class="font-black"
+                                            >Meta:&nbsp;{{
+                                                campaign.goalAmount ?? 0
+                                            }}
+                                        </small>
+                                    </div>
+
+                                    <div
+                                        class="flex text-center font-['Roboto'] text-gray-50 bg-green-600 rounded-sm p-1 px-2"
+                                    >
+                                        <small class="font-black"
+                                            >Total:&nbsp;{{
+                                                campaign.goalAmount ?? 0
+                                            }}
+                                        </small>
+                                    </div>
+                                    <div
+                                        :class="{
+                                            'bg-red-600':
+                                                campaign.status === 'SUSPENSA',
+                                            'bg-yellow-600':
+                                                campaign.status === 'PENDENTE',
+                                            'bg-green-600':
+                                                campaign.status === 'COMPLETA',
+                                            'bg-gray-600':
+                                                campaign.status === 'ACTIVA',
+                                        }"
+                                        class="flex text-center font-['Roboto'] text-gray-50 rounded-sm p-1 px-2"
+                                    >
+                                        <small class="font-black">
+                                            Status: {{ campaign.status }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div>
+                    <h5
+                        class="font-black font-['Roboto'] text-start self-start"
+                    >
+                        — Campanhas de prioridade alta
+                    </h5>
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8 my-8"
+                    >
+                        <article
+                            v-for="campaign in high_priority"
+                            :key="campaign.id"
+                            class="!w-full rounded-3xl rounded-b-xl bg-white dark:bg-gray-700 dark:border-gray-700 transition-transform duration-300 transform-gpu hover:scale-105 hover:shadow-none hover:shadow-gray-400"
+                        >
+                            <header class="rounded-t-xl">
+                                <img
+                                    v-if="!campaign.media?.type"
+                                    class="col-span-1 sm:col-span-3 h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full"
+                                    src="https://placehold.co/600x400"
+                                />
+                                <img
+                                    v-else-if="campaign.media.type === 'image'"
+                                    class="col-span-1 sm:col-span-3 h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full"
+                                    :src="campaign.media.url"
+                                />
+                                <video
+                                    v-else-if="campaign.media.type === 'video'"
+                                    class="col-span-1 sm:col-span-3 h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full"
+                                    :src="campaign.media.url"
+                                    controls
+                                ></video>
+                            </header>
+
+                            <div
+                                class="w-full p-4 pb-6 text-gray-500 grid justify-items-stretch col-span-3"
                             >
-                            </video>
-                        </header>
-                        <div class="flex  justify-between">
-                            <div class="flex text-center font-['Roboto'] text-gray-50 bg-gray-600 rounded-sm  p-0.5 px-2">
-                                <small class="font-black">Causa:&nbsp;{{ campaign.cause.title ?? 0 }} </small>
-                            </div>
-                            <div :class="{
-                                'bg-red-500' : campaign.priority === 'ALTA',
-                                'bg-orange-400' : campaign.priority === 'MEDIA',
-                                'bg-green-600' : campaign.priority === 'BAIXA',
-
-                            }" class="flex text-center font-['Roboto'] text-gray-50  rounded-sm  p-0.5 px-2">
-                                <small class="font-black">Prioridade:&nbsp;{{ campaign.priority }} </small>
-                            </div>
-                        </div>
-                        <div class="w-full p-4 pt-1 pb-6 text-gray-500 grid justify-items-stretch col-span-3">
-                            <div class="flex justify-between">
-                                <h1 class="text-lg font-['Lato'] font-semibold line-clamp-2 py-1 uppercase first-letter:uppercase">
-                                    {{ campaign.title }}
-                                </h1>
-
-                            </div>
-
-                            <div class="line-clamp-2 pb-2 text-sm" v-html="campaign.description">
-                            </div>
-
-                            <div class="flex mb-1 font-normal text-sm text-gray-700 dark:text-gray-400 line-clamp-1"
-                                 itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                                <svg class="text-gray-400" width="20" height="20"
-                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor">
-                                    <circle cx="12" cy="10" r="3" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle>
-                                    <path
-                                        d="M12 2C7.58172 2 4 5.58172 4 10C4 11.8919 4.40209 13.1304 5.5 14.5L12 22L18.5 14.5C19.5979 13.1304 20 11.8919 20 10C20 5.58172 16.4183 2 12 2Z"
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round"></path>
-                                </svg>
-                                <p class="line-clamp-1">
-                                    &nbsp;
-                                    {{ campaign?.district?.name }}
-                                </p>
-
-                            </div>
-                            <div class="flex  gap-2 mt-2 font-black">
-                                <div class="flex text-center font-['Roboto'] text-gray-50 bg-blue-600 rounded-sm  p-1 px-2">
-                                    <small class="font-black">Meta:&nbsp;{{ campaign.goalAmount ?? 0 }} </small>
+                                <div class="flex justify-between">
+                                    <h1
+                                        class="text-lg font-['Lato'] font-semibold line-clamp-2 py-1 uppercase first-letter:uppercase"
+                                    >
+                                        {{ campaign.title }}
+                                    </h1>
                                 </div>
+                                <div
+                                    class="line-clamp-2 pb-2 text-sm"
+                                    v-html="campaign.description"
+                                ></div>
 
-                                <div class="flex text-center font-['Roboto'] text-gray-50 bg-green-600 rounded-sm  p-1 px-2">
-                                    <small class="font-black">Total:&nbsp;{{ campaign.goalAmount ?? 0 }} </small>
+                                <div
+                                    class="flex mb-1 font-normal text-sm text-gray-700 dark:text-gray-400 line-clamp-1"
+                                    itemprop="address"
+                                    itemscope
+                                    itemtype="https://schema.org/PostalAddress"
+                                >
+                                    <svg
+                                        class="text-gray-400"
+                                        width="20"
+                                        height="20"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                    >
+                                        <circle
+                                            cx="12"
+                                            cy="10"
+                                            r="3"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></circle>
+                                        <path
+                                            d="M12 2C7.58172 2 4 5.58172 4 10C4 11.8919 4.40209 13.1304 5.5 14.5L12 22L18.5 14.5C19.5979 13.1304 20 11.8919 20 10C20 5.58172 16.4183 2 12 2Z"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></path>
+                                    </svg>
+                                    <p class="line-clamp-1">
+                                        &nbsp;
+                                        {{ campaign?.district?.name }}
+                                    </p>
                                 </div>
-                                <div :class="{
-                                    'bg-red-600' : campaign.status === 'SUSPENSA',
-                                    'bg-yellow-600' : campaign.status === 'PENDENTE',
-                                    'bg-green-600' : campaign.status === 'COMPLETA',
-                                    'bg-gray-600' : campaign.status === 'ACTIVA',
+                                <div class="flex gap-2 mt-2 font-black">
+                                    <div
+                                        class="flex text-center font-['Roboto'] text-gray-50 bg-blue-600 rounded-sm p-1 px-2"
+                                    >
+                                        <small class="font-black"
+                                            >Meta:&nbsp;{{
+                                                campaign.goalAmount ?? 0
+                                            }}
+                                        </small>
+                                    </div>
 
-                                }" class="flex text-center font-['Roboto'] text-gray-50  rounded-sm  p-1 px-2">
-                                    <small class="font-black">
-                                        Status:  {{ campaign.status }}
-                                    </small>
+                                    <div
+                                        class="flex text-center font-['Roboto'] text-gray-50 bg-green-600 rounded-sm p-1 px-2"
+                                    >
+                                        <small class="font-black"
+                                            >Total:&nbsp;{{
+                                                campaign.goalAmount ?? 0
+                                            }}
+                                        </small>
+                                    </div>
+                                    <div
+                                        :class="{
+                                            'bg-red-600':
+                                                campaign.status === 'SUSPENSA',
+                                            'bg-yellow-600':
+                                                campaign.status === 'PENDENTE',
+                                            'bg-green-600':
+                                                campaign.status === 'COMPLETA',
+                                            'bg-gray-600':
+                                                campaign.status === 'ACTIVA',
+                                        }"
+                                        class="flex text-center font-['Roboto'] text-gray-50 rounded-sm p-1 px-2"
+                                    >
+                                        <small class="font-black">
+                                            Status: {{ campaign.status }}
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </article>
+                        </article>
+                    </div>
+                </div>
+                <div>
+                    <h5
+                        class="font-black font-['Roboto'] text-start self-start"
+                    >
+                        — Campanhas de prioridade média
+                    </h5>
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8 my-8"
+                    >
+                        <article
+                            v-for="campaign in medium_priority"
+                            :key="campaign.id"
+                            class="!w-full rounded-3xl rounded-b-xl bg-white dark:bg-gray-700 dark:border-gray-700 transition-transform duration-300 transform-gpu hover:scale-105 hover:shadow-none hover:shadow-gray-400"
+                        >
+                            <header class="rounded-t-xl">
+                                <img
+                                    v-if="!campaign.media?.type"
+                                    class="col-span-1 sm:col-span-3 h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full"
+                                    src="https://placehold.co/600x400"
+                                />
+                                <img
+                                    v-else-if="campaign.media.type === 'image'"
+                                    class="col-span-1 sm:col-span-3 h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full"
+                                    :src="campaign.media.url"
+                                />
+                                <video
+                                    v-else-if="campaign.media.type === 'video'"
+                                    class="col-span-1 sm:col-span-3 h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full"
+                                    :src="campaign.media.url"
+                                    controls
+                                ></video>
+                            </header>
+
+                            <div
+                                class="w-full p-4 pb-6 text-gray-500 grid justify-items-stretch col-span-3"
+                            >
+                                <div class="flex justify-between">
+                                    <h1
+                                        class="text-lg font-['Lato'] font-semibold line-clamp-2 py-1 uppercase first-letter:uppercase"
+                                    >
+                                        {{ campaign.title }}
+                                    </h1>
+                                </div>
+                                <div
+                                    class="line-clamp-2 pb-2 text-sm"
+                                    v-html="campaign.description"
+                                ></div>
+
+                                <div
+                                    class="flex mb-1 font-normal text-sm text-gray-700 dark:text-gray-400 line-clamp-1"
+                                    itemprop="address"
+                                    itemscope
+                                    itemtype="https://schema.org/PostalAddress"
+                                >
+                                    <svg
+                                        class="text-gray-400"
+                                        width="20"
+                                        height="20"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                    >
+                                        <circle
+                                            cx="12"
+                                            cy="10"
+                                            r="3"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></circle>
+                                        <path
+                                            d="M12 2C7.58172 2 4 5.58172 4 10C4 11.8919 4.40209 13.1304 5.5 14.5L12 22L18.5 14.5C19.5979 13.1304 20 11.8919 20 10C20 5.58172 16.4183 2 12 2Z"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></path>
+                                    </svg>
+                                    <p class="line-clamp-1">
+                                        &nbsp;
+                                        {{ campaign?.district?.name }}
+                                    </p>
+                                </div>
+                                <div class="flex gap-2 mt-2 font-black">
+                                    <div
+                                        class="flex text-center font-['Roboto'] text-gray-50 bg-blue-600 rounded-sm p-1 px-2"
+                                    >
+                                        <small class="font-black"
+                                            >Meta:&nbsp;{{
+                                                campaign.goalAmount ?? 0
+                                            }}
+                                        </small>
+                                    </div>
+
+                                    <div
+                                        class="flex text-center font-['Roboto'] text-gray-50 bg-green-600 rounded-sm p-1 px-2"
+                                    >
+                                        <small class="font-black"
+                                            >Total:&nbsp;{{
+                                                campaign.goalAmount ?? 0
+                                            }}
+                                        </small>
+                                    </div>
+                                    <div
+                                        :class="{
+                                            'bg-red-600':
+                                                campaign.status === 'SUSPENSA',
+                                            'bg-yellow-600':
+                                                campaign.status === 'PENDENTE',
+                                            'bg-green-600':
+                                                campaign.status === 'COMPLETA',
+                                            'bg-gray-600':
+                                                campaign.status === 'ACTIVA',
+                                        }"
+                                        class="flex text-center font-['Roboto'] text-gray-50 rounded-sm p-1 px-2"
+                                    >
+                                        <small class="font-black">
+                                            Status: {{ campaign.status }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div>
+                    <h5
+                        class="font-black font-['Roboto'] text-start self-start"
+                    >
+                        — Campanhas de prioridade baixa
+                    </h5>
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8 my-8"
+                    >
+                        <article
+                            v-for="campaign in low_priority"
+                            :key="campaign.id"
+                            class="!w-full rounded-3xl rounded-b-xl bg-white dark:bg-gray-700 dark:border-gray-700 transition-transform duration-300 transform-gpu hover:scale-105 hover:shadow-none hover:shadow-gray-400"
+                        >
+                            <header class="rounded-t-xl">
+                                <img
+                                    v-if="!campaign.media?.type"
+                                    class="col-span-1 sm:col-span-3 h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full"
+                                    src="https://placehold.co/600x400"
+                                />
+                                <img
+                                    v-else-if="campaign.media.type === 'image'"
+                                    class="col-span-1 sm:col-span-3 h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full"
+                                    :src="campaign.media.url"
+                                />
+                                <video
+                                    v-else-if="campaign.media.type === 'video'"
+                                    class="col-span-1 sm:col-span-3 h-72 sm:h-40 md:h-64 object-cover rounded-t-xl w-full"
+                                    :src="campaign.media.url"
+                                    controls
+                                ></video>
+                            </header>
+
+                            <div
+                                class="w-full p-4 pb-6 text-gray-500 grid justify-items-stretch col-span-3"
+                            >
+                                <div class="flex justify-between">
+                                    <h1
+                                        class="text-lg font-['Lato'] font-semibold line-clamp-2 py-1 uppercase first-letter:uppercase"
+                                    >
+                                        {{ campaign.title }}
+                                    </h1>
+                                </div>
+                                <div
+                                    class="line-clamp-2 pb-2 text-sm"
+                                    v-html="campaign.description"
+                                ></div>
+
+                                <div
+                                    class="flex mb-1 font-normal text-sm text-gray-700 dark:text-gray-400 line-clamp-1"
+                                    itemprop="address"
+                                    itemscope
+                                    itemtype="https://schema.org/PostalAddress"
+                                >
+                                    <svg
+                                        class="text-gray-400"
+                                        width="20"
+                                        height="20"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                    >
+                                        <circle
+                                            cx="12"
+                                            cy="10"
+                                            r="3"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></circle>
+                                        <path
+                                            d="M12 2C7.58172 2 4 5.58172 4 10C4 11.8919 4.40209 13.1304 5.5 14.5L12 22L18.5 14.5C19.5979 13.1304 20 11.8919 20 10C20 5.58172 16.4183 2 12 2Z"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></path>
+                                    </svg>
+                                    <p class="line-clamp-1">
+                                        &nbsp;
+                                        {{ campaign?.district?.name }}
+                                    </p>
+                                </div>
+                                <div class="flex gap-2 mt-2 font-black">
+                                    <div
+                                        class="flex text-center font-['Roboto'] text-gray-50 bg-blue-600 rounded-sm p-1 px-2"
+                                    >
+                                        <small class="font-black"
+                                            >Meta:&nbsp;{{
+                                                campaign.goalAmount ?? 0
+                                            }}
+                                        </small>
+                                    </div>
+
+                                    <div
+                                        class="flex text-center font-['Roboto'] text-gray-50 bg-green-600 rounded-sm p-1 px-2"
+                                    >
+                                        <small class="font-black"
+                                            >Total:&nbsp;{{
+                                                campaign.goalAmount ?? 0
+                                            }}
+                                        </small>
+                                    </div>
+                                    <div
+                                        :class="{
+                                            'bg-red-600':
+                                                campaign.status === 'SUSPENSA',
+                                            'bg-yellow-600':
+                                                campaign.status === 'PENDENTE',
+                                            'bg-green-600':
+                                                campaign.status === 'COMPLETA',
+                                            'bg-gray-600':
+                                                campaign.status === 'ACTIVA',
+                                        }"
+                                        class="flex text-center font-['Roboto'] text-gray-50 rounded-sm p-1 px-2"
+                                    >
+                                        <small class="font-black">
+                                            Status: {{ campaign.status }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
                 </div>
             </div>
             <div
@@ -171,7 +589,8 @@ defineProps<{
                 <div
                     class="ms-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-end sm:ms-0"
                 >
-                    Donations {{ (new Date()).getFullYear() }} all rights reserved.
+                    Donations {{ new Date().getFullYear() }} all rights
+                    reserved.
                 </div>
             </div>
         </div>

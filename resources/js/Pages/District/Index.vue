@@ -39,17 +39,17 @@ watch(
         value?.envelopes.forEach((element) => {
             Flasher.flash(
                 element.notification.type,
-                element.notification.message
+                element.notification.message,
             );
         });
-    }
+    },
 );
 
 watch(
     () => props.districts.links,
     (value) => {
         links.value = value;
-    }
+    },
 );
 
 watch(searchTerm, (value) => {
@@ -61,7 +61,7 @@ watch(searchTerm, (value) => {
             only: ["districts"],
             replace: false,
             preserveState: true,
-        }
+        },
     );
 });
 
@@ -146,7 +146,7 @@ function closeDeleteDistrictModal() {
                             >
                                 <tr>
                                     <th scope="col" class="px-4 py-3">
-                                        <div class="flex items-center ">Id</div>
+                                        <div class="flex items-center">Id</div>
                                     </th>
                                     <th scope="col" class="px-4 py-3">
                                         <div class="flex items-center">
@@ -169,8 +169,8 @@ function closeDeleteDistrictModal() {
                             <tbody>
                                 <tr
                                     class="border-b dark:border-gray-700"
-                                    v-for="(district,index) in districts.data"
-                                    :key="district.id ?? index "
+                                    v-for="(district, index) in districts.data"
+                                    :key="district.id ?? index"
                                 >
                                     <th
                                         scope="row"
@@ -190,7 +190,9 @@ function closeDeleteDistrictModal() {
                                     <td class="px-4 py-3 w-32">
                                         <button
                                             type="button"
-                                            @click="openEditDistrictModal(district)"
+                                            @click="
+                                                openEditDistrictModal(district)
+                                            "
                                             class="flex items-center justify-center text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                         >
                                             <svg
@@ -224,7 +226,11 @@ function closeDeleteDistrictModal() {
                                     <td class="px-4 py-3 justify-end w-32">
                                         <button
                                             type="button"
-                                            @click="openDeleteDistrictModal(district)"
+                                            @click="
+                                                openDeleteDistrictModal(
+                                                    district,
+                                                )
+                                            "
                                             class="flex items-center justify-center text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
                                         >
                                             <svg

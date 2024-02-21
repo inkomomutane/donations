@@ -2,6 +2,7 @@
 
 use App\Data\CampaignData;
 use App\Http\Controllers\Campaign\StoreCampaignController;
+use App\Http\Controllers\Campaign\WelcomeController;
 use App\Http\Controllers\District\CreateDistrict;
 use App\Http\Controllers\District\DeleteDistrict;
 use App\Http\Controllers\District\GetDistricts;
@@ -23,17 +24,8 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    $campaigns = Campaign::paginate(12);
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-        'campaigns' => CampaignData::collection($campaigns),
-        'causes' => \App\Data\CauseData::collection(\App\Models\Cause::all()),
-    ]);
-})->name('welcome');
+Route::get('/', WelcomeController::class)->name('welcome');
+
 
 Route::get('/dashboard',\App\Http\Controllers\Campaign\GetCampaignsController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -76,6 +68,10 @@ Route::middleware('auth')->group(function () {
     #--- Campaign routes --#
 
     Route::post('/campaign/store', StoreCampaignController::class)->name('campaign.store');
+    Route::get('/campaign/{campaign}/edit', \App\Http\Controllers\Campaign\EditCampaignController::class)->name('campaign.edit');
+    Route::post('/campaign/{campaign}/update', \App\Http\Controllers\Campaign\UpdateCampaignController::class)->name('campaign.update');
+    Route::delete('/campaign/{campaign}/delete', \App\Http\Controllers\Campaign\DeleteCampaignController::class)->name('campaign.destroy');
+    Route::get('/campaign/{cause}/show', \App\Http\Controllers\Campaign\ShowCampaignByCauseController::class)->name('campaign.show.cause');
 });
 
 

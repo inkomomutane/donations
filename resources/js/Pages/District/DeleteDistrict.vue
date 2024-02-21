@@ -26,7 +26,7 @@ const form = useForm({
 const deleteDistrict = () => {
     form.delete(
         route("district.delete", {
-            district: props.district.id ,
+            district: props.district.id,
         }),
         {
             preserveScroll: true,
@@ -35,7 +35,7 @@ const deleteDistrict = () => {
                 props.close();
             },
             onFinish: () => form.reset(),
-        }
+        },
     );
 };
 </script>

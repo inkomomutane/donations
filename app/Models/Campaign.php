@@ -9,7 +9,9 @@ namespace App\Models;
 use App\Data\CampaignData;
 use App\Enums\CampaignEnum;
 use App\Enums\CampaignPriorityEnum;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\LaravelData\WithData;
 use Spatie\MediaLibrary\HasMedia;
@@ -20,12 +22,15 @@ class Campaign extends Model implements  HasMedia
 
 {
     use HasUlids;
+    use HasFactory;
     use WithData;
     use InteractsWithMedia;
 
 	protected $table = 'campaigns';
 	public $incrementing = false;
     protected  string $dataClass = CampaignData::class;
+
+   protected $with = ['postedBy', 'district', 'cause'];
 
 	protected $casts = [
 		'goal_amount' => 'float',
@@ -41,7 +46,6 @@ class Campaign extends Model implements  HasMedia
 	protected $fillable = [
 		'title',
 		'description',
-		'content',
 		'goal_amount',
 		'current_amount',
 		'start_date',
@@ -58,6 +62,35 @@ class Campaign extends Model implements  HasMedia
     {
 		return $this->belongsTo(Cause::class);
 	}
+
+
+    protected static function boot(): void
+    {
+        parent::boot();
+        static::addGlobalScope('withMediaData', function (Builder $builder) {
+            $builder->whereRelation('media', 'collection_name', 'campaigns');
+        });
+    }
+
+    public function scopeHighPriority(Builder $query): void
+    {
+        $query->where('priority', CampaignPriorityEnum::ALTA());
+    }
+
+    public function scopeLowPriority(Builder $query): void
+    {
+        $query->where('priority', CampaignPriorityEnum::BAIXA());
+    }
+
+    public function scopeMediumPriority(Builder $query): void
+    {
+        $query->where('priority', CampaignPriorityEnum::MEDIA());
+    }
+
+    public function scopeUrgentPriority(Builder $query): void
+    {
+        $query->where('priority', CampaignPriorityEnum::URGENTE());
+    }
 
 	public function postedBy(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
@@ -81,6 +114,6 @@ class Campaign extends Model implements  HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('campaigns');
+        $this->addMediaCollection('campaigns')->singleFile();
     }
 }

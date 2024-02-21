@@ -76,7 +76,7 @@
                                     onRemoveTemplatingFile(
                                         file,
                                         removeFileCallback,
-                                        index
+                                        index,
                                     )
                                 "
                                 class="px-4"
@@ -221,8 +221,8 @@
                         disabledUpload && disabledCancel
                             ? ''
                             : disabledUpload || disabledCancel
-                            ? 'sm:grid-cols-2'
-                            : 'sm:grid-cols-3'
+                              ? 'sm:grid-cols-2'
+                              : 'sm:grid-cols-3'
                     }`"
                 >
                     <button
@@ -253,7 +253,7 @@
                             ></path>
                         </svg>
                         <span class="mx-4"
-                        >{{ labelText ?? "Upload image" }}
+                            >{{ labelText ?? "Upload image" }}
                         </span>
                     </button>
                     <button
@@ -335,8 +335,8 @@ export default {
         successEvent: Function,
         errorEvent: Function,
         mediaType: {
-            type : String,
-        default : 'image/*'
+            type: String,
+            default: "image/*",
         },
         disabledUpload: {
             type: Boolean,
@@ -351,9 +351,9 @@ export default {
             type: Boolean,
             required: true,
         },
-        fileLimit:{
+        fileLimit: {
             type: Number,
-            default :50
+            default: 50,
         },
         progressUploadImage: Boolean,
         className: {
