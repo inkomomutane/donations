@@ -14,7 +14,7 @@ import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import "vs-vue3-select/dist/vs-vue3-select.css";
 import PrimeVue from "primevue/config";
 import.meta.glob(["../images/**", "../fonts/**"]);
-const appName = import.meta.env.VITE_APP_NAME || "Donations";
+const appName = import.meta.env.VITE_APP_NAME || "Nepano";
 import "@/components/select/select.css";
 
 //fonts,images
@@ -27,8 +27,8 @@ createInertiaApp({
             `./Pages/${name}.vue`,
             import.meta.glob<DefineComponent>("./Pages/**/*.vue"),
         ),
-    setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
+    setup({el, App, props, plugin}) {
+        createApp({render: () => h(App, props)})
             .use(plugin)
             .component("v-select", VueSelect)
             .component("QuillEditor", QuillEditor)
@@ -40,4 +40,4 @@ createInertiaApp({
     progress: {
         color: "#4B5563",
     },
-});
+}).then(r =>{});

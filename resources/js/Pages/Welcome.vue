@@ -5,6 +5,7 @@ import { Campaigns } from "@/types";
 import { defineProps, PropType } from "vue";
 import CampaignData = App.Data.CampaignData;
 import Header from "@/Pages/Website/Header.vue";
+const appName = import.meta.env.VITE_APP_NAME;
 const props = defineProps<{
     canLogin?: boolean;
     canRegister?: boolean;
@@ -589,7 +590,7 @@ const props = defineProps<{
                 <div
                     class="ms-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-end sm:ms-0"
                 >
-                    Donations {{ new Date().getFullYear() }} all rights
+                    {{ appName }} {{ new Date().getFullYear() }} all rights
                     reserved.
                 </div>
             </div>
