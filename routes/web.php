@@ -1,13 +1,18 @@
 <?php
 
 use App\Data\CampaignData;
+use App\Http\Controllers\Campaign\DeleteCampaignController;
+use App\Http\Controllers\Campaign\EditCampaignController;
+use App\Http\Controllers\Campaign\ShowCampaignByCauseController;
 use App\Http\Controllers\Campaign\StoreCampaignController;
+use App\Http\Controllers\Campaign\UpdateCampaignController;
 use App\Http\Controllers\Campaign\WelcomeController;
 use App\Http\Controllers\District\CreateDistrict;
 use App\Http\Controllers\District\DeleteDistrict;
 use App\Http\Controllers\District\GetDistricts;
 use App\Http\Controllers\District\UpdateDistrict;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Transactions\DonateToCampaignController;
 use App\Models\Campaign;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -66,13 +71,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/district/{district}/delete', DeleteDistrict::class)->name('district.delete');
 
     #--- Campaign routes --#
-
     Route::post('/campaign/store', StoreCampaignController::class)->name('campaign.store');
-    Route::get('/campaign/{campaign}/edit', \App\Http\Controllers\Campaign\EditCampaignController::class)->name('campaign.edit');
-    Route::post('/campaign/{campaign}/update', \App\Http\Controllers\Campaign\UpdateCampaignController::class)->name('campaign.update');
-    Route::delete('/campaign/{campaign}/delete', \App\Http\Controllers\Campaign\DeleteCampaignController::class)->name('campaign.destroy');
-    Route::get('/campaign/{cause}/show', \App\Http\Controllers\Campaign\ShowCampaignByCauseController::class)->name('campaign.show.cause');
+    Route::get('/campaign/{campaign}/edit', EditCampaignController::class)->name('campaign.edit');
+    Route::post('/campaign/{campaign}/update', UpdateCampaignController::class)->name('campaign.update');
+    Route::delete('/campaign/{campaign}/delete', DeleteCampaignController::class)->name('campaign.destroy');
+    Route::get('/campaign/{cause}/show', ShowCampaignByCauseController::class)->name('campaign.show.cause');
+
 });
 
-
+Route::post('/campaign/{campaign}/donate', DonateToCampaignController::class)->name('campaign.donate');
 require __DIR__.'/auth.php';

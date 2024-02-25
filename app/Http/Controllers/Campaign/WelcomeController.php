@@ -21,10 +21,10 @@ class WelcomeController extends Controller
             'phpVersion' => PHP_VERSION,
             'campaigns' => $this->handle(request('cause') ?? null),
             'causes' => CauseData::collection(Cause::all()),
-            'urgent_priority' => CampaignData::collection(Campaign::urgentPriority()->take(3)->get()),
-            'high_priority' => CampaignData::collection(Campaign::highPriority()->take(3)->get()),
-            'low_priority' => CampaignData::collection(Campaign::lowPriority()->take(3)->get()),
-            'medium_priority' => CampaignData::collection(Campaign::mediumPriority()->take(3)->get()),
+            'urgent_priority' => CampaignData::collection(Campaign::urgentPriority()->take(6)->get()),
+            'high_priority' => CampaignData::collection(Campaign::highPriority()->take(6)->get()),
+            'low_priority' => CampaignData::collection(Campaign::lowPriority()->take(6)->get()),
+            'medium_priority' => CampaignData::collection(Campaign::mediumPriority()->take(6)->get()),
         ]);
     }
 

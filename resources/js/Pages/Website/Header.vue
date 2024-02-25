@@ -1,9 +1,26 @@
 <script setup lang="ts">
 import header from "@images/header.png"
+
+window.addEventListener('scroll', function () {
+
+    if(document.getElementById("default-nav") && document.getElementById("default-section")){
+        let navbar = document.getElementById("default-nav");
+        let section = document.getElementById("default-section");
+        let sticky = section?.offsetTop ?? 0;
+        if (window.scrollY >= sticky) {
+            navbar?.classList.add(
+                "fixed", "top-0", "w-full", "z-50", "transition", "duration-500", "ease-in-out","bg-white"
+
+            )
+        } else {
+            navbar?.classList.remove("fixed", "top-0", "w-full", "z-50", "transition", "duration-500", "ease-in-out","bg-white");
+        }
+    }
+});
 </script>
 
 <template>
-    <nav class="bg-emerald-50  w-full dark:border-gray-600">
+    <nav id="default-nav" class="bg-emerald-50  w-full dark:border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="https://flowbite.com/" class="flex items-center space-x-2 rtl:space-x-reverse">
               <svg class="w-8 h-8 fill-emerald-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -65,7 +82,7 @@ import header from "@images/header.png"
             </div>
         </div>
     </nav>
-    <section class="relative bg-gradient-to-b to-white from-emerald-50 dark:bg-gray-900">
+    <section  class="relative bg-gradient-to-b to-white from-emerald-50 dark:bg-gray-900">
 
         <div class="absolute   inset-0 bg-black opacity-0"></div>
         <div class="relative px-4 mx-auto max-w-screen-xxl  lg:px-32 ">
@@ -105,24 +122,24 @@ import header from "@images/header.png"
         </div>
     </section>
 
-    <div class="bg-emerald-950 py-10 hidden lg:block">
+    <div id="default-section"  class="bg-emerald-950 py-10 block">
         <div class="max-w-screen-2xl mx-auto">
             <div class="grid grid-cols-3 justify-between items-center font-['Lexend_Deca'] ">
                 <div class="flex flex-col items-center space-x-2">
-                    <h2 class="text-4xl text-yellow-200 font-black "><sup>+</sup>23000</h2>
-                    <div class="flex text-center text-white font-yellow-100 max-w-[15rem] font-light mt-3">
+                    <h2 class="text-base md:text-4xl text-yellow-200 font-black "><sup>+</sup>23000</h2>
+                    <div class="flex text-xs md:text-base text-center text-white font-yellow-100 max-w-[15rem] font-light mt-3">
                         Beneficiários ajudados a partir de campanhas realizadas.
                     </div>
                 </div>
                 <div class="flex flex-col items-center space-x-2">
-                    <h2 class="text-4xl text-yellow-200 font-black "><sup>+</sup>10000</h2>
-                    <div class="flex text-center text-white font-yellow-100 max-w-[15rem] font-light mt-3">
+                    <h2 class="text-base md:text-4xl text-yellow-200 font-black "><sup>+</sup>10000</h2>
+                    <div class="flex text-xs md:text-base text-center text-white font-yellow-100 max-w-[15rem] font-light mt-3">
                         Campanhas realizadas com sucesso.
                     </div>
                 </div>
                 <div class="flex flex-col items-center space-x-2">
-                    <h2 class="text-4xl text-yellow-200 font-black "><sup>+</sup>8Milhões </h2>
-                    <div class="flex text-center text-white font-yellow-100 max-w-[15rem] font-light mt-3">
+                    <h2 class="text-base md:text-4xl text-yellow-200 font-black "><sup>+</sup>8Milhões </h2>
+                    <div class="flex text-xs md:text-base text-center text-white font-yellow-100 max-w-[15rem] font-light mt-3">
                         Arrecadados nas campanhas realizadas.
                     </div>
                 </div>

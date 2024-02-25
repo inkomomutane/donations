@@ -3,6 +3,12 @@
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
     "keywords": ["laravel", "framework"],
+    "repositories": [
+    {
+        "url": "https://github.com/Samuel-Bie/mpesa-laravel-sdk.git",
+        "type": "git"
+    }
+],
     "license": "MIT",
     "require": {
         "php": "^8.1",
@@ -14,13 +20,14 @@
         "laravel/tinker": "^2.8",
         "php-flasher/flasher-laravel": "^1.15",
         "php-flasher/flasher-noty-laravel": "^1.15",
-        "samuelbie/mpesa": "^1.5",
+        "samuelbie/mpesa": "dev-master",
         "spatie/laravel-data": "^3.11",
         "spatie/laravel-enum": "^3.0",
         "spatie/laravel-medialibrary": "^11.0",
         "spatie/laravel-typescript-transformer": "^2.3",
         "spatie/typescript-transformer": "^2.2",
         "tightenco/ziggy": "^1.0"
+
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

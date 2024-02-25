@@ -1,4 +1,5 @@
 import { FlahserType } from "./types/index.d";
+import CurrencyPlugin from "currency.js";
 import flasher from "@flasher/flasher";
 const Flasher = flasher;
 Flasher.addTheme("flasher", {
@@ -72,4 +73,23 @@ export const tooltip = (message: string, className: string = "ml-5") => {
 
         class: `bg-slate-950 dark:bg-slate-100 ${className} rounded `,
     };
+};
+
+
+
+export const currencyFormatter = (
+    number: number,
+    currency: string | null = "MZN",
+) => {
+    return CurrencyPlugin(number, {
+        symbol: (currency ?? "MZN") + " ",
+        precision: 2,
+    }).format();
+};
+export const numberMoneyFormat = (number: number | null) => {
+    if (number === null) {
+        return 0;
+    }
+    const formattedNumber = Math.round((number + Number.EPSILON) * 100) / 100;
+    return new Intl.NumberFormat().format(formattedNumber);
 };
