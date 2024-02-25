@@ -17,14 +17,13 @@ class WelcomeController extends Controller
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
-            'laravelVersion' => Application::VERSION,
-            'phpVersion' => PHP_VERSION,
-            'campaigns' => $this->handle(request('cause') ?? null),
+            'campaigns' => $this->handle(request('cause')),
+            'total_campaigns' =>Campaign::whereStatus('COMPLETA')->count(),
+            'total_amount_raised' => Campaign::sum('current_amount'),
             'causes' => CauseData::collection(Cause::all()),
-            'urgent_priority' => CampaignData::collection(Campaign::urgentPriority()->take(6)->get()),
-            'high_priority' => CampaignData::collection(Campaign::highPriority()->take(6)->get()),
-            'low_priority' => CampaignData::collection(Campaign::lowPriority()->take(6)->get()),
-            'medium_priority' => CampaignData::collection(Campaign::mediumPriority()->take(6)->get()),
+            'high_priority' => CampaignData::collection(Campaign::active()->highPriority()->take(6)->get()),
+            'low_priority' => CampaignData::collection(Campaign::active()->lowPriority()->take(6)->get()),
+            'medium_priority' => CampaignData::collection(Campaign::active()->mediumPriority()->take(6)->get()),
         ]);
     }
 
@@ -36,7 +35,5 @@ class WelcomeController extends Controller
         }
         return CampaignData::collection($campaigns);
     }
-
-
 
 }

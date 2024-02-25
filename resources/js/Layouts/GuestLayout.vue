@@ -6,11 +6,11 @@ import logo from "@images/logo.png";
 
 <template>
     <div
-        class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-green-300 dark:bg-gray-900"
+        class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-emerald-700 "
     >
         <div>
             <Link href="/">
-                <img :src="logo" class="w-32" />
+                <ApplicationLogo :image="logo" class="w-20 h-20 fill-current text-gray-500" />
             </Link>
         </div>
 

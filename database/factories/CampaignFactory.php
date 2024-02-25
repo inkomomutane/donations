@@ -16,14 +16,16 @@ class CampaignFactory extends Factory
 
     public function definition(): array
     {
+        $goalAmount = $this->faker->randomFloat(2, 100, 1000);
+        $currentAmount = $this->faker->randomFloat(2, 100, $goalAmount);
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'goal_amount' => $this->faker->randomFloat(2, 100, 1000),
-            'current_amount' => $this->faker->randomFloat(2, 100, 1000),
+            'goal_amount' => $goalAmount,
+            'current_amount' =>$currentAmount,
             'start_date' => $this->faker->dateTime,
             'end_date' => $this->faker->dateTime,
-            'status' => $this->faker->randomElement(CampaignEnum::toValues()),
+            'status' => 'ACTIVA',
             'priority' => $this->faker->randomElement(CampaignPriorityEnum::toValues()),
             'district_id' => $this->faker->randomElement(District::all()->pluck('id')),
             'cause_id' => $this->faker->randomElement(Cause::all()->pluck('id')),

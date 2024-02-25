@@ -46,8 +46,8 @@ class DatabaseSeeder extends Seeder
               'description' => 'Apoio'
          ]);
 
-         Campaign::factory(10)->create()->each(
+         Campaign::factory(50)->create()->each(
              fn(Campaign $campaign) => $campaign->addMediaFromUrl('https://source.unsplash.com/random')
-             ->toMediaCollection('images'));
+             ->toMediaCollection('campaigns'));
     }
 }

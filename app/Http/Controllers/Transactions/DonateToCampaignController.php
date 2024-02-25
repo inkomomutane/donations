@@ -24,8 +24,7 @@ class DonateToCampaignController extends Controller
 
     public function __invoke(Campaign $campaign,Request $request)
     {
-
-        $reference = (\Str::substr(((string) \Str::ulid()),0,6));
+        $reference = strtolower((\Str::substr(((string) \Str::ulid()),0,12)));
         $validatedData =$request->validate(
             $this->rules(),
         );
@@ -41,23 +40,37 @@ class DonateToCampaignController extends Controller
                 third_party_reference:$reference,
             );
 
-            if($response->getResponse() === '201'){
+
+            if($response->getStatusCode() === '201' || $response->getStatusCode() === '200'){
                 CampaignTransaction::create([
-                   'amount' => $validatedData['amount'],
-                   'payment_method' => 'MPESA',
-                   'name'  => $reference,
-                    'campaign_id' => $campaign->id
+                   'amount' =>(float) $validatedData['amount'],
+                   'payment_method' => 'M_PESA',
+                   'name'  => $validatedData['name'] ?? 'Anónimo',
+                    'campaign_id' => $campaign->id,
+                    'transaction_id' => $reference,
                 ]);
                 $campaign->update([
                     'current_amount' => $campaign->current_amount + $validatedData['amount']
                 ]);
                 $campaign->update();
                 $campaign->refresh();
+                if($campaign->current_amount >= $campaign->goal_amount){
+                    $campaign->update([
+                        'status' => 'COMPLETA'
+                    ]);
+                    $campaign->save();
+
+                }
+            }else{
+                DB::rollBack();
+                flash()->addError('Erro ao fazer a sua doação.');
+                return redirect()->back();
             }
             DB::commit();
             flash()->addSuccess('Doação feita com sucesso. \n Obrigado por fazer parte da comunidade.');
             return redirect()->back();
-        } catch (Exception) {
+        } catch (Exception $exception) {
+            dd($exception);
             flash()->addError('Erro ao fazer a sua doação.');
             return redirect()->back();
         }

@@ -67,11 +67,13 @@ class Campaign extends Model implements  HasMedia
     protected static function boot(): void
     {
         parent::boot();
-        static::addGlobalScope('withMediaData', function (Builder $builder) {
-            $builder->whereRelation('media', 'collection_name', 'campaigns');
-        });
     }
 
+
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('status', CampaignEnum::ACTIVA()->value);
+    }
     public function scopeHighPriority(Builder $query): void
     {
         $query->where('priority', CampaignPriorityEnum::ALTA());
@@ -81,6 +83,8 @@ class Campaign extends Model implements  HasMedia
     {
         $query->where('priority', CampaignPriorityEnum::BAIXA());
     }
+
+
 
     public function scopeMediumPriority(Builder $query): void
     {

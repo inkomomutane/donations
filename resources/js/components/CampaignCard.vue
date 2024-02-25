@@ -63,7 +63,8 @@ const percentageOfGoal  = (goal : number|null, current : number|null ) => {
                 </h1>
             </div>
             <div class="w-full bg-emerald-100 rounded-full h-2.5 mb-2 dark:bg-gray-700 inline-flex items-center">
-                <div class="bg-green-600 h-2.5 rounded-full rounded-r-none dark:bg-green-500 " :style="`width:${percentageOfGoal(campaign.goalAmount ,campaign.currentAmount )}`"></div>
+                <div class="bg-green-600 h-2.5 rounded-full rounded-r-none dark:bg-green-500  " :style="`width: ${percentageOfGoal(campaign.goalAmount ,campaign.currentAmount )}`" ></div>
+
                 <div class="rounded-full p-2 w-1 -ml-1 bg-green-300  "></div>
             </div>
             <div class="grid grid-cols-2 gap-2 my-2 ">
