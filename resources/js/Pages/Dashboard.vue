@@ -69,7 +69,7 @@ watch(
                 </div>
                 <div>
                     <main
-                        class="py-6 px-4 sm:p-6 md:py-10 md:px-8 grid grid-cols-4 gap-8"
+                        class="py-6 px-4 sm:p-6 md:py-10 md:px-8 grid grid-cols-3 gap-8"
                     >
                         <Link
                             :href="

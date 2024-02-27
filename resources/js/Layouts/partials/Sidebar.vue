@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { useSidebar } from "@/composables/useSidebar";
 import { Link } from "@inertiajs/vue3";
 import logo from "@images/logo.png";
+import ApplicationLogo from "@components/ApplicationLogo.vue";
 
 const { isOpen } = useSidebar();
 const activeClass = ref("bg-gray-900  text-gray-100 ");
@@ -29,7 +30,7 @@ const inactiveClass = ref(
         >
             <div class="flex items-start justify-start mt-8 ml-3">
                 <Link href="/" class="flex items-center">
-                    <img :src="logo" class="w-12" />
+                    <ApplicationLogo  class="w-11 fill-current text-gray-500" />
                     <span class="text-white text-2xl font-bold mx-2"
                         >Donations</span
                     >

@@ -6,9 +6,10 @@ use App\Enums\CampaignEnum;
 use App\Enums\CampaignPriorityEnum;
 use App\Models\Campaign;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\Lazy;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /** @typescript */
 class CampaignData extends Data
@@ -27,7 +28,9 @@ class CampaignData extends Data
         public readonly  Lazy|null|CauseData $cause,
         public readonly  ?string $postedAt,
         public readonly  Lazy|null|UserData $postedBy,
-        public readonly  Lazy|null|MediaData $media
+        public readonly  Lazy|null|MediaData $media,
+        #[DataCollectionOf(CampaignComment::class)]
+        public readonly  DataCollection $comments,
     ) {}
 
     public static function fromModel(Campaign $campaign) :self{
@@ -35,8 +38,6 @@ class CampaignData extends Data
         $campaign->loadMissing(['district','cause','postedBy','media' =>  function(MorphMany $morphMany){
             $morphMany->where('collection_name','=','campaigns')->get();
         }]);
-
-
 
         return new self(
             id: $campaign->id,
@@ -53,8 +54,8 @@ class CampaignData extends Data
             postedAt: $campaign->posted_at ? $campaign->posted_at->format('Y-m-d') : null,
             postedBy:Lazy::whenLoaded('postedBy',$campaign,static fn() => $campaign->postedBy->getData()
             ),
-            media:MediaData::fromModel($campaign->getFirstMedia('campaigns'))
-
+            media:MediaData::fromModel($campaign->getFirstMedia('campaigns')),
+            comments: CampaignComment::collection($campaign->campaignComments)
         );
     }
 

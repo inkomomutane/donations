@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Header from "@/Pages/Website/Header.vue";
 import {PropType} from "vue";
+import {Link} from "@inertiajs/vue3";
 import {currencyFormatter, numberMoneyFormat} from "@/helprs";
 
 defineProps({
@@ -33,6 +34,9 @@ const percentageOfGoal  = (goal : number|null, current : number|null ) => {
     <article
         class="!w-full rounded-3xl rounded-b-xl bg-white dark:bg-gray-700 dark:border-gray-700 transition-transform duration-300 transform-gpu hover:scale-105 hover:shadow-none hover:shadow-gray-400"
     >
+        <Link :href="route('campaign.view',{
+            campaign: campaign.id
+        })">
         <header class="rounded-t-xl">
             <img
                 v-if="!campaign.media?.type"
@@ -51,6 +55,7 @@ const percentageOfGoal  = (goal : number|null, current : number|null ) => {
                 controls
             ></video>
         </header>
+        </Link>
 
         <div
             class="w-full p-4 pb-5 text-emerald-950 grid justify-items-stretch col-span-3"

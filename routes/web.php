@@ -3,9 +3,11 @@
 use App\Data\CampaignData;
 use App\Http\Controllers\Campaign\DeleteCampaignController;
 use App\Http\Controllers\Campaign\EditCampaignController;
+use App\Http\Controllers\Campaign\PostCampaignCommentController;
 use App\Http\Controllers\Campaign\ShowCampaignByCauseController;
 use App\Http\Controllers\Campaign\StoreCampaignController;
 use App\Http\Controllers\Campaign\UpdateCampaignController;
+use App\Http\Controllers\Campaign\ViewCampaignOnWebsiteController;
 use App\Http\Controllers\Campaign\WelcomeController;
 use App\Http\Controllers\District\CreateDistrict;
 use App\Http\Controllers\District\DeleteDistrict;
@@ -76,8 +78,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/campaign/{campaign}/update', UpdateCampaignController::class)->name('campaign.update');
     Route::delete('/campaign/{campaign}/delete', DeleteCampaignController::class)->name('campaign.destroy');
     Route::get('/campaign/{cause}/show', ShowCampaignByCauseController::class)->name('campaign.show.cause');
+//    ViewCampaignOnWebsiteController
 
 });
 
 Route::post('/campaign/{campaign}/donate', DonateToCampaignController::class)->name('campaign.donate');
+Route::get('/campaign/{campaign}/view',ViewCampaignOnWebsiteController::class)->name('campaign.view');
+Route::post('/campaign/{campaign}/comment', PostCampaignCommentController::class)->name('campaign.comment');
+
 require __DIR__.'/auth.php';

@@ -1,9 +1,13 @@
 declare namespace App.Data {
+    export type CampaignComment = {
+        name: string;
+        comment: string;
+        createdAt: string;
+    };
     export type CampaignData = {
         id: string | null;
         title: string | null;
         description: string | null;
-        content: string | null;
         goalAmount: number | null;
         currentAmount: number | null;
         startDate: string | null;
@@ -15,6 +19,7 @@ declare namespace App.Data {
         postedAt: string | null;
         postedBy: any | App.Data.UserData | null;
         media: any | any | null;
+        comments: any;
     };
     export type CauseData = {
         id: string | null;
