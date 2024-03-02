@@ -75,8 +75,6 @@ export const tooltip = (message: string, className: string = "ml-5") => {
     };
 };
 
-
-
 export const currencyFormatter = (
     number: number,
     currency: string | null = "MZN",

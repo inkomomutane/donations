@@ -27,8 +27,8 @@ createInertiaApp({
             `./Pages/${name}.vue`,
             import.meta.glob<DefineComponent>("./Pages/**/*.vue"),
         ),
-    setup({el, App, props, plugin}) {
-        createApp({render: () => h(App, props)})
+    setup({ el, App, props, plugin }) {
+        createApp({ render: () => h(App, props) })
             .use(plugin)
             .component("v-select", VueSelect)
             .component("QuillEditor", QuillEditor)
@@ -40,4 +40,4 @@ createInertiaApp({
     progress: {
         color: "#4B5563",
     },
-}).then(r =>{});
+}).then((r) => {});

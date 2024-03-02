@@ -85,5 +85,6 @@ Route::middleware('auth')->group(function () {
 Route::post('/campaign/{campaign}/donate', DonateToCampaignController::class)->name('campaign.donate');
 Route::get('/campaign/{campaign}/view',ViewCampaignOnWebsiteController::class)->name('campaign.view');
 Route::post('/campaign/{campaign}/comment', PostCampaignCommentController::class)->name('campaign.comment');
+Route::get('/about-us',static fn() => Inertia::render('Website/about_us/AboutUs') )->name('about');
 
 require __DIR__.'/auth.php';

@@ -30,7 +30,7 @@ const inactiveClass = ref(
         >
             <div class="flex items-start justify-start mt-8 ml-3">
                 <Link href="/" class="flex items-center">
-                    <ApplicationLogo  class="w-11 fill-current text-gray-500" />
+                    <ApplicationLogo class="w-11 fill-current text-gray-500" />
                     <span class="text-white text-2xl font-bold mx-2"
                         >Donations</span
                     >
