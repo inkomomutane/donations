@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const appName = import.meta.env.VITE_APP_NAME;
+import {Link} from "@inertiajs/vue3";
 </script>
 
 <template>
@@ -47,7 +48,13 @@ const appName = import.meta.env.VITE_APP_NAME;
                     | {{ new Date().getFullYear() }}. Todos os direitos
                     reservados.
                 </div>
+                <div class="ms-4 text-center text-sm text-white dark:text-gray-400 sm:text-end sm:ms-0">
+                    <Link :href="route('policy')" class="hover:underline">
+                        Políticas de privacidade
+                    </Link>
+                </div>
             </div>
+
         </div>
     </div>
 </template>

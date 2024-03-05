@@ -6,6 +6,14 @@ defineProps({
         default: "",
     },
 });
+
+const routeCampaignRoute = () => {
+    return route().current("campaign.*") || route("web.campaigns");
+};
+
+const notRouteCampaignRoute = () => {
+    return !route().current("campaign.*") ;
+};
 </script>
 <template>
     <nav
@@ -115,25 +123,45 @@ defineProps({
 
                         <Link
 
-                            href=""
+                            :href="route('web.campaigns')"
                             class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-emerald-700 md:p-0 md:dark:hover:text-emerald-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                             :class="{
                                 'text-emerald-900 bg-left-bottom bg-gradient-to-r from-emerald-900 to-gold-emerald-950 bg-[length:90%_2px] bg-no-repeat':
-                                    route().current('campaign.*'),
+                                    routeCampaignRoute(),
                                 'text-gray-900 bg-left-bottom bg-gradient-to-r from-emerald-900 to-gold-emerald-950 bg-[length:0%_2px] hover:bg-[length:90%_2px] bg-no-repeat hover:duration-500':
-                                    !route().current('campaign.*'),
+                                    notRouteCampaignRoute(),
                             }">
                             Campanhas
                         </Link>
 
                     </li>
                     <li>
-                        <a
-                            href="#"
-                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-emerald-700 md:p-0 md:dark:hover:text-emerald-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                        >
-                            Contatos
-                        </a>
+                        <Link
+
+                            :href="route('contact')"
+                            class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-emerald-700 md:p-0 md:dark:hover:text-emerald-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                            :class="{
+                                'text-emerald-900 bg-left-bottom bg-gradient-to-r from-emerald-900 to-gold-emerald-950 bg-[length:90%_2px] bg-no-repeat':
+                                    route().current('contact'),
+                                'text-gray-900 bg-left-bottom bg-gradient-to-r from-emerald-900 to-gold-emerald-950 bg-[length:0%_2px] hover:bg-[length:90%_2px] bg-no-repeat hover:duration-500':
+                                    !route().current('contact'),
+                            }">
+                            Contacto
+                        </Link>
+                    </li>
+                    <li v-if="route().current('policy')">
+                        <Link
+
+                            :href="route('policy')"
+                            class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-emerald-700 md:p-0 md:dark:hover:text-emerald-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                            :class="{
+                                'text-emerald-900 bg-left-bottom bg-gradient-to-r from-emerald-900 to-gold-emerald-950 bg-[length:90%_2px] bg-no-repeat':
+                                    route().current('policy'),
+                                'text-gray-900 bg-left-bottom bg-gradient-to-r from-emerald-900 to-gold-emerald-950 bg-[length:0%_2px] hover:bg-[length:90%_2px] bg-no-repeat hover:duration-500':
+                                    !route().current('policy'),
+                            }">
+                            Política de privacidade
+                        </Link>
                     </li>
                 </ul>
             </div>

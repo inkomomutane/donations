@@ -86,5 +86,8 @@ Route::post('/campaign/{campaign}/donate', DonateToCampaignController::class)->n
 Route::get('/campaign/{campaign}/view',ViewCampaignOnWebsiteController::class)->name('campaign.view');
 Route::post('/campaign/{campaign}/comment', PostCampaignCommentController::class)->name('campaign.comment');
 Route::get('/about-us',static fn() => Inertia::render('Website/about_us/AboutUs') )->name('about');
+Route::get('/contact',static fn() => Inertia::render('Website/contact/Contact') )->name('contact');
+Route::get('/policy',static fn() => Inertia::render('Website/Policy/Policy') )->name('policy');
+Route::get('/all-campaigns',\App\Http\Controllers\Campaign\GetAllCampaignsController::class)->name('web.campaigns');
 
 require __DIR__.'/auth.php';

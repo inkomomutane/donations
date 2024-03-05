@@ -131,8 +131,8 @@ watch(
                 </div>
 
                 <div class="flex justify-end">
-                    <a
-                        href="/"
+                    <Link
+                        :href="route('web.campaigns')"
                         class="inline-flex items-center justify-center px-5 py-3 mr-3 text-center rounded-sm bg-gradient-to-r from-teal-600 to-emerald-600 font-black text-white font-['Lexend_Deca'] hover:bg-emerald-400 focus:ring-4 focus:ring-primary-300 aos-init aos-animate"
                         data-aos="fade-down"
                     >
@@ -148,7 +148,7 @@ watch(
                                 d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                                 clip-rule="evenodd"
                             ></path></svg
-                    ></a>
+                    ></Link>
                 </div>
             </div>
         </div>
@@ -177,8 +177,8 @@ watch(
                 </div>
 
                 <div class="flex justify-end">
-                    <a
-                        href="/"
+                    <Link
+                        :href="route('web.campaigns')"
                         class="inline-flex items-center justify-center px-5 py-3 mr-3 text-center rounded-sm bg-gradient-to-r from-teal-600 to-emerald-600 font-black text-white font-['Lexend_Deca'] hover:bg-emerald-400 focus:ring-4 focus:ring-primary-300 aos-init aos-animate"
                         data-aos="fade-down"
                     >
@@ -194,7 +194,7 @@ watch(
                                 d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                                 clip-rule="evenodd"
                             ></path></svg
-                    ></a>
+                    ></Link>
                 </div>
             </div>
         </div>
@@ -223,8 +223,8 @@ watch(
                 </div>
 
                 <div class="flex justify-end">
-                    <a
-                        href="/"
+                    <Link
+                        :href="route('web.campaigns')"
                         class="inline-flex items-center justify-center px-5 py-3 mr-3 text-center rounded-sm bg-gradient-to-r from-teal-600 to-emerald-600 font-black text-white font-['Lexend_Deca'] hover:bg-emerald-400 focus:ring-4 focus:ring-primary-300 aos-init aos-animate"
                         data-aos="fade-down"
                     >
@@ -240,7 +240,7 @@ watch(
                                 d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                                 clip-rule="evenodd"
                             ></path></svg
-                    ></a>
+                    ></Link>
                 </div>
             </div>
         </div>
