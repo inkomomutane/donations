@@ -117,8 +117,26 @@ window.addEventListener("scroll", function () {
 <template>
     <Head title="Campanhas" />
     <Navbar className="sticky top-0  z-10" />
-    <div  class="bg-emerald-950 py-10 block">
+    <div  class="bg-emerald-950 py-2 block">
         <div class="max-w-screen-2xl mx-auto">
+            <ul class="flex flex-wrap -mb-px text-white font-['Lato'] items-center">
+
+
+                <li class="me-2" v-for="cause in causes">
+                    <Link  :href="route('web.campaigns',{
+                        cause: cause.id
+
+                    })" class="inline-block p-3"
+                    :class="{
+                        'bg-emerald-900': route().current('web.campaigns',{ cause: cause.id }),
+                        'hover:bg-emerald-900': !route().current('web.campaigns',{ cause: cause.id }),
+                    }"
+                    >
+                        {{ cause.title }}
+                    </Link>
+                </li>
+
+            </ul>
         </div>
     </div>
     <section  id="default-section"  class="bg-gradient-to-b from-emerald-50 via-gary-200 to-emerald-100 md:pt-8">
