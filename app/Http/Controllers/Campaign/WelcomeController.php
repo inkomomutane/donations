@@ -29,9 +29,9 @@ class WelcomeController extends Controller
 
     public function handle($cause = null) {
         if($cause) {
-            $campaigns = Campaign::where('cause_id', $cause)->paginate(12);
+            $campaigns = Campaign::active()->where('cause_id', $cause)->paginate(12);
         } else {
-            $campaigns = Campaign::paginate(12);
+            $campaigns = Campaign::active()->paginate(12);
         }
         return CampaignData::collection($campaigns);
     }

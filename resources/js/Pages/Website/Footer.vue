@@ -5,7 +5,7 @@ import {Link} from "@inertiajs/vue3";
 
 <template>
     <div
-        class="sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-emerald-950"
+        class="sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-emerald-950  bottom-0"
     >
         <div class="p-6 lg:p-8 max-w-screen-2xl">
             <div

@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import {Head, Link, router, useForm} from "@inertiajs/vue3";
 import { defineProps, PropType, ref, watch } from "vue";
 import CampaignData = App.Data.CampaignData;
-import Header from "@/Pages/Website/Header.vue";
 import CampaignCard from "@components/CampaignCard.vue";
 import Modal from "@components/Modal.vue";
 import { FlasherResponse } from "@flasher/flasher";
 import Flasher from "@/helprs";
 import Footer from "@/Pages/Website/Footer.vue";
 import Navbar from "@/Pages/Website/Navbar.vue";
+import CampaignCardpreloader from "@components/CampaignCardpreloader.vue";
 const props = defineProps({
     campaigns: Object,
     causes: Array<App.Data.CauseData>,
     messages: Object as PropType<FlasherResponse>,
+    search: String,
 });
 
 setTimeout(() => {
@@ -112,23 +113,52 @@ window.addEventListener("scroll", function () {
         }
     }
 });
+
+const campaignSearch = ref(props.search ?? '')  ;
+const searchProgress = ref(false);
+watch(
+    () => campaignSearch,
+    (value) => {
+        router.visit(route('web.campaigns', {
+            search: value.value,
+        }),{
+            only: [
+                'search',
+                'campaigns'
+            ],
+            preserveScroll: true,
+            preserveState: true,
+            onStart: (event) => {
+                searchProgress.value = true;
+            },
+            onProgress: (event) => {
+                searchProgress.value = true;
+            },
+            onFinish: (event) => {
+                console.log('searched')
+                searchProgress.value = false;
+            },
+        });
+    },{
+        deep: true,
+    }
+);
 </script>
 
 <template>
     <Head title="Campanhas" />
     <Navbar className="sticky top-0  z-10" />
     <div  class="bg-emerald-950 py-2 block">
-        <div class="max-w-screen-2xl mx-auto">
-            <ul class="flex flex-wrap -mb-px text-white font-['Lato'] items-center">
 
-
+        <div class="max-w-screen-2xl px-8 md:mx-auto overflow-x-autor">
+            <ul class="inline-flex -mb-px text-white font-['Lato'] items-center overflow-scroll overflow-x-scroll ">
                 <li class="me-2" v-for="cause in causes">
                     <Link  :href="route('web.campaigns',{
                         cause: cause.id
 
-                    })" class="inline-block p-3"
+                    })" class="inline-block p-2 rounded px-4 font-['Anta']"
                     :class="{
-                        'bg-emerald-900': route().current('web.campaigns',{ cause: cause.id }),
+                        'bg-emerald-900 font-black ': route().current('web.campaigns',{ cause: cause.id }),
                         'hover:bg-emerald-900': !route().current('web.campaigns',{ cause: cause.id }),
                     }"
                     >
@@ -139,14 +169,26 @@ window.addEventListener("scroll", function () {
             </ul>
         </div>
     </div>
-    <section  id="default-section"  class="bg-gradient-to-b from-emerald-50 via-gary-200 to-emerald-100 md:pt-8">
+
+    <section  id="default-section"  class="bg-gradient-to-b from-emerald-50 via-gary-200 to-emerald-100 md:pt-8 min-h-[50vh]">
         <div
             class="max-w-screen-2xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
         >
+            <div class="w-full">
+
+            <input name="campaign" type="text"
+                   v-model="campaignSearch"
+                   class="h-14 w-full pr-8 pl-5 rounded z-0  focus:outline-none shadow-2xl
+                   bg-emerald-50 border-2 border-emerald-900 text-emerald-900
+                     focus:ring-2 focus:ring-emerald-600 focus:border-transparent
+                "
+                   placeholder="Pesquisar campanha...">
+        </div>
             <div>
                 <div
-                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8 my-8"
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8 my-8 "
                 >
+
                     <CampaignCard
                         @donate="openDonationModal(campaign)"
                         v-for="campaign in campaigns.data"

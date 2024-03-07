@@ -4,6 +4,7 @@ use App\Data\CampaignData;
 use App\Http\Controllers\Campaign\DeleteCampaignController;
 use App\Http\Controllers\Campaign\EditCampaignController;
 use App\Http\Controllers\Campaign\PostCampaignCommentController;
+use App\Http\Controllers\Campaign\ReportController;
 use App\Http\Controllers\Campaign\ShowCampaignByCauseController;
 use App\Http\Controllers\Campaign\StoreCampaignController;
 use App\Http\Controllers\Campaign\UpdateCampaignController;
@@ -36,7 +37,11 @@ Route::get('/', WelcomeController::class)->name('welcome');
 
 Route::get('/dashboard',\App\Http\Controllers\Campaign\GetCampaignsController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','verified'])->group(function () {
+
+//    ReportController
+
+    Route::get('/reports', ReportController::class)->name('reports');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
