@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const appName = import.meta.env.VITE_APP_NAME;
-import {Link} from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
     <div
-        class="sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-emerald-950  bottom-0"
+        class="sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-emerald-950 bottom-0"
     >
         <div class="p-6 lg:p-8 max-w-screen-2xl">
             <div
@@ -48,13 +48,14 @@ import {Link} from "@inertiajs/vue3";
                     | {{ new Date().getFullYear() }}. Todos os direitos
                     reservados.
                 </div>
-                <div class="ms-4 text-center text-sm text-white dark:text-gray-400 sm:text-end sm:ms-0">
+                <div
+                    class="ms-4 text-center text-sm text-white dark:text-gray-400 sm:text-end sm:ms-0"
+                >
                     <Link :href="route('policy')" class="hover:underline">
                         Políticas de privacidade
                     </Link>
                 </div>
             </div>
-
         </div>
     </div>
 </template>

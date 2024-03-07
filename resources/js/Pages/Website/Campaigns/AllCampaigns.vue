@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {Head, Link, router, useForm} from "@inertiajs/vue3";
+import { Head, Link, router, useForm } from "@inertiajs/vue3";
 import { defineProps, PropType, ref, watch } from "vue";
 import CampaignData = App.Data.CampaignData;
 import CampaignCard from "@components/CampaignCard.vue";
@@ -75,7 +75,6 @@ watch(
     },
 );
 
-
 window.addEventListener("scroll", function () {
     if (
         document.getElementById("default-nav") &&
@@ -114,81 +113,92 @@ window.addEventListener("scroll", function () {
     }
 });
 
-const campaignSearch = ref(props.search ?? '')  ;
+const campaignSearch = ref(props.search ?? "");
 const searchProgress = ref(false);
 watch(
     () => campaignSearch,
     (value) => {
-        router.visit(route('web.campaigns', {
-            search: value.value,
-        }),{
-            only: [
-                'search',
-                'campaigns'
-            ],
-            preserveScroll: true,
-            preserveState: true,
-            onStart: (event) => {
-                searchProgress.value = true;
+        router.visit(
+            route("web.campaigns", {
+                search: value.value,
+            }),
+            {
+                only: ["search", "campaigns"],
+                preserveScroll: true,
+                preserveState: true,
+                onStart: (event) => {
+                    searchProgress.value = true;
+                },
+                onProgress: (event) => {
+                    searchProgress.value = true;
+                },
+                onFinish: (event) => {
+                    console.log("searched");
+                    searchProgress.value = false;
+                },
             },
-            onProgress: (event) => {
-                searchProgress.value = true;
-            },
-            onFinish: (event) => {
-                console.log('searched')
-                searchProgress.value = false;
-            },
-        });
-    },{
+        );
+    },
+    {
         deep: true,
-    }
+    },
 );
 </script>
 
 <template>
     <Head title="Campanhas" />
     <Navbar className="sticky top-0  z-10" />
-    <div  class="bg-emerald-950 py-2 block">
-
+    <div class="bg-emerald-950 py-2 block">
         <div class="max-w-screen-2xl px-8 md:mx-auto overflow-x-autor">
-            <ul class="inline-flex -mb-px text-white font-['Lato'] items-center overflow-scroll overflow-x-scroll ">
+            <ul
+                class="inline-flex -mb-px text-white font-['Lato'] items-center overflow-scroll overflow-x-scroll"
+            >
                 <li class="me-2" v-for="cause in causes">
-                    <Link  :href="route('web.campaigns',{
-                        cause: cause.id
-
-                    })" class="inline-block p-2 rounded px-4 font-['Anta']"
-                    :class="{
-                        'bg-emerald-900 font-black ': route().current('web.campaigns',{ cause: cause.id }),
-                        'hover:bg-emerald-900': !route().current('web.campaigns',{ cause: cause.id }),
-                    }"
+                    <Link
+                        :href="
+                            route('web.campaigns', {
+                                cause: cause.id,
+                            })
+                        "
+                        class="inline-block p-2 rounded px-4 font-['Anta']"
+                        :class="{
+                            'bg-emerald-900 font-black ': route().current(
+                                'web.campaigns',
+                                { cause: cause.id },
+                            ),
+                            'hover:bg-emerald-900': !route().current(
+                                'web.campaigns',
+                                { cause: cause.id },
+                            ),
+                        }"
                     >
                         {{ cause.title }}
                     </Link>
                 </li>
-
             </ul>
         </div>
     </div>
 
-    <section  id="default-section"  class="bg-gradient-to-b from-emerald-50 via-gary-200 to-emerald-100 md:pt-8 min-h-[50vh]">
+    <section
+        id="default-section"
+        class="bg-gradient-to-b from-emerald-50 via-gary-200 to-emerald-100 md:pt-8 min-h-[50vh]"
+    >
         <div
             class="max-w-screen-2xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
         >
             <div class="w-full">
-
-            <input name="campaign" type="text"
-                   v-model="campaignSearch"
-                   class="h-14 w-full pr-8 pl-5 rounded z-0  focus:outline-none shadow-2xl
-                   bg-emerald-50 border-2 border-emerald-900 text-emerald-900
-                     focus:ring-2 focus:ring-emerald-600 focus:border-transparent
-                "
-                   placeholder="Pesquisar campanha...">
-        </div>
+                <input
+                    name="campaign"
+                    type="text"
+                    v-model="campaignSearch"
+                    class="h-14 w-full pr-8 pl-5 rounded z-0 focus:outline-none shadow-2xl bg-emerald-50 border-2 border-emerald-900 text-emerald-900 focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
+                    placeholder="Pesquisar campanha..."
+                />
+            </div>
             <div>
                 <div
-                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8 my-8 "
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8 my-8"
                 >
-
                     <CampaignCard
                         @donate="openDonationModal(campaign)"
                         v-for="campaign in campaigns.data"
@@ -201,25 +211,25 @@ watch(
                 class="sm:rounded my-1 flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
                 aria-label="Table navigation"
             >
+                <span
+                    class="text-sm font-normal text-emerald-500 dark:text-emerald-400"
+                >
+                    Mostrando
                     <span
-                        class="text-sm font-normal text-emerald-500 dark:text-emerald-400"
-                    >
-                        Mostrando
-                        <span
-                            class="font-semibold text-emerald-900 dark:text-white"
+                        class="font-semibold text-emerald-900 dark:text-white"
                         >{{
-                                `${campaigns.meta.from ?? 0}-${
-                                    campaigns.meta.to ?? 0
-                                }`
-                            }}</span
-                        >
-                        de
-                        <span
-                            class="font-semibold text-emerald-900 dark:text-white"
-                        >
-                            {{ campaigns.meta.total }}</span
-                        >
-                    </span>
+                            `${campaigns.meta.from ?? 0}-${
+                                campaigns.meta.to ?? 0
+                            }`
+                        }}</span
+                    >
+                    de
+                    <span
+                        class="font-semibold text-emerald-900 dark:text-white"
+                    >
+                        {{ campaigns.meta.total }}</span
+                    >
+                </span>
                 <ul class="inline-flex items-stretch -space-x-px">
                     <li
                         v-if="links[0].active"
@@ -228,52 +238,49 @@ watch(
                         <Link
                             href=""
                             class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
-                        >&laquo; Anterior </Link
-                        >
+                            >&laquo; Anterior
+                        </Link>
                     </li>
                     <li v-else>
                         <Link
                             class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                             :href="links[0].url ?? ''"
-                        >&laquo; Anterior </Link
-                        >
+                            >&laquo; Anterior
+                        </Link>
                     </li>
-                    <li
-                        v-for="link in links.slice(1, -1)"
-                        :key="link.label"
-                    >
+                    <li v-for="link in links.slice(1, -1)" :key="link.label">
                         <Link
                             class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                             v-if="!link.active"
                             :href="link.url ?? ''"
-                        >{{ link.label }}
+                            >{{ link.label }}
                         </Link>
                         <span
                             class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 border border-emerald-300 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                             v-else
                             :class="`${
-                                    link.active
-                                        ? 'bg-emerald-700 dark:bg-slate-600 text-white dark:text-slate-100'
-                                        : ''
-                                }`"
-                        >{{ link.label }}</span
+                                link.active
+                                    ? 'bg-emerald-700 dark:bg-slate-600 text-white dark:text-slate-100'
+                                    : ''
+                            }`"
+                            >{{ link.label }}</span
                         >
                     </li>
                     <li
                         v-if="links.slice(-1)[0].active"
                         class="disabled flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white rounded-r-lg border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                     >
-                            <span
-                                class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white rounded-r-lg border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
+                        <span
+                            class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white rounded-r-lg border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                             >Próximo &raquo;</span
-                            >
+                        >
                     </li>
                     <li
                         v-else
                         class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white rounded-r-lg border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                     >
                         <Link :href="links.slice(-1)[0].url ?? ''"
-                        >Próximo &raquo;</Link
+                            >Próximo &raquo;</Link
                         >
                     </li>
                 </ul>
@@ -310,7 +317,7 @@ watch(
                     Fazer uma doação para: <br />
                     <span
                         class="text-emerald-900 dark:text-white font-bold font-['Lexend_Deca']"
-                    >{{ campaignToDonate?.title }}</span
+                        >{{ campaignToDonate?.title }}</span
                     >
                 </h3>
                 <div class="space-y-6">
@@ -318,7 +325,7 @@ watch(
                         <label
                             for="name"
                             class="block mb-2 text-sm font-medium text-emerald-900 dark:text-white"
-                        >Nome (anónimo)</label
+                            >Nome (anónimo)</label
                         >
                         <input
                             type="text"
@@ -329,14 +336,14 @@ watch(
                             placeholder="Nome do doador (opcional)"
                         />
                         <span class="text-medium text-red-500 font-semibold">{{
-                                form.errors.name
-                            }}</span>
+                            form.errors.name
+                        }}</span>
                     </div>
                     <div>
                         <label
                             for="name"
                             class="block mb-2 text-sm font-medium text-emerald-900 dark:text-white"
-                        >Contacto (MPESA)</label
+                            >Contacto (MPESA)</label
                         >
                         <input
                             type="text"
@@ -347,14 +354,14 @@ watch(
                             placeholder="Contacto (MPESA)"
                         />
                         <span class="text-medium text-red-500 font-semibold">{{
-                                form.errors.phone
-                            }}</span>
+                            form.errors.phone
+                        }}</span>
                     </div>
                     <div>
                         <label
                             for="amount"
                             class="block mb-2 text-sm font-medium text-emerald-900 dark:text-white"
-                        >Valor a doar</label
+                            >Valor a doar</label
                         >
                         <input
                             type="text"
@@ -365,8 +372,8 @@ watch(
                             placeholder="Valor a doar"
                         />
                         <span class="text-medium text-red-500 font-semibold">{{
-                                form.errors.amount
-                            }}</span>
+                            form.errors.amount
+                        }}</span>
                     </div>
 
                     <button

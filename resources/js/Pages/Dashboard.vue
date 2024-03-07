@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head, Link, router} from "@inertiajs/vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
 import CreateCampaign from "@/Pages/Campaign/CreateCampaign.vue";
-import {onMounted, PropType, ref, watch} from "vue";
+import { onMounted, PropType, ref, watch } from "vue";
 import { FlasherResponse } from "@flasher/flasher";
 import Flasher from "@/helprs";
 
@@ -51,34 +51,35 @@ watch(
         links.value = value;
     },
 );
-const campaignSearch = ref( '')  ;
+const campaignSearch = ref("");
 const searchProgress = ref(false);
 watch(
     () => campaignSearch,
     (value) => {
-        router.visit(route('dashboard', {
-            search: value.value,
-        }),{
-            only: [
-                'search',
-                'campaigns'
-            ],
-            preserveScroll: true,
-            preserveState: true,
-            onStart: (event) => {
-                searchProgress.value = true;
+        router.visit(
+            route("dashboard", {
+                search: value.value,
+            }),
+            {
+                only: ["search", "campaigns"],
+                preserveScroll: true,
+                preserveState: true,
+                onStart: (event) => {
+                    searchProgress.value = true;
+                },
+                onProgress: (event) => {
+                    searchProgress.value = true;
+                },
+                onFinish: (event) => {
+                    console.log("searched");
+                    searchProgress.value = false;
+                },
             },
-            onProgress: (event) => {
-                searchProgress.value = true;
-            },
-            onFinish: (event) => {
-                console.log('searched')
-                searchProgress.value = false;
-            },
-        });
-    },{
+        );
+    },
+    {
         deep: true,
-    }
+    },
 );
 </script>
 
@@ -104,19 +105,17 @@ watch(
                     </div>
                 </div>
                 <div>
-
                     <main
                         class="py-6 px-4 sm:p-6 md:py-10 md:px-8 grid grid-cols-3 gap-8"
                     >
                         <div class="w-full col-span-3">
-
-                            <input name="campaign" type="text"
-                                   v-model="campaignSearch"
-                                   class="h-14 w-full pr-8 pl-5 rounded z-0  focus:outline-none shadow-2xl
-                   bg-emerald-50 border-2 border-emerald-900 text-emerald-900
-                     focus:ring-2 focus:ring-emerald-600 focus:border-transparent
-                "
-                                   placeholder="Pesquisar campanha...">
+                            <input
+                                name="campaign"
+                                type="text"
+                                v-model="campaignSearch"
+                                class="h-14 w-full pr-8 pl-5 rounded z-0 focus:outline-none shadow-2xl bg-emerald-50 border-2 border-emerald-900 text-emerald-900 focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
+                                placeholder="Pesquisar campanha..."
+                            />
                         </div>
                         <Link
                             :href="
@@ -261,7 +260,7 @@ watch(
                         Mostrando
                         <span
                             class="font-semibold text-emerald-900 dark:text-white"
-                        >{{
+                            >{{
                                 `${campaigns.meta.from ?? 0}-${
                                     campaigns.meta.to ?? 0
                                 }`
@@ -282,15 +281,15 @@ watch(
                             <Link
                                 href=""
                                 class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
-                            >&laquo; Anterior </Link
-                            >
+                                >&laquo; Anterior
+                            </Link>
                         </li>
                         <li v-else>
                             <Link
                                 class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                                 :href="links[0].url ?? ''"
-                            >&laquo; Anterior </Link
-                            >
+                                >&laquo; Anterior
+                            </Link>
                         </li>
                         <li
                             v-for="link in links.slice(1, -1)"
@@ -300,7 +299,7 @@ watch(
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                                 v-if="!link.active"
                                 :href="link.url ?? ''"
-                            >{{ link.label }}
+                                >{{ link.label }}
                             </Link>
                             <span
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 border border-emerald-300 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
@@ -310,7 +309,7 @@ watch(
                                         ? 'bg-emerald-700 dark:bg-slate-600 text-white dark:text-slate-100'
                                         : ''
                                 }`"
-                            >{{ link.label }}</span
+                                >{{ link.label }}</span
                             >
                         </li>
                         <li
@@ -319,7 +318,7 @@ watch(
                         >
                             <span
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white rounded-r-lg border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
-                            >Próximo &raquo;</span
+                                >Próximo &raquo;</span
                             >
                         </li>
                         <li
@@ -327,7 +326,7 @@ watch(
                             class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white rounded-r-lg border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                         >
                             <Link :href="links.slice(-1)[0].url ?? ''"
-                            >Próximo &raquo;</Link
+                                >Próximo &raquo;</Link
                             >
                         </li>
                     </ul>
