@@ -32,7 +32,7 @@ const inactiveClass = ref(
                 <Link href="/" class="flex items-center">
                     <ApplicationLogo class="w-11 fill-current text-gray-500" />
                     <span class="text-white text-2xl font-bold mx-2"
-                        >Donations</span
+                        >GOV</span
                     >
                 </Link>
             </div>

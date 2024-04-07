@@ -3,6 +3,7 @@
 use App\Data\CampaignData;
 use App\Http\Controllers\Campaign\CampaignTransactionsController;
 use App\Http\Controllers\Campaign\DeleteCampaignController;
+use App\Http\Controllers\Campaign\DownloadTransactionExcelController;
 use App\Http\Controllers\Campaign\EditCampaignController;
 use App\Http\Controllers\Campaign\PostCampaignCommentController;
 use App\Http\Controllers\Campaign\ReportController;
@@ -85,6 +86,8 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::delete('/campaign/{campaign}/delete', DeleteCampaignController::class)->name('campaign.destroy');
     Route::get('/campaign/{cause}/show', ShowCampaignByCauseController::class)->name('campaign.show.cause');
     Route::get('/campaign/{campaign}/transactions', CampaignTransactionsController::class)->name('campaign.transactions');
+    //TransactionsExport
+    Route::get('/campaign/{campaign}/download', DownloadTransactionExcelController::class)->name('campaign.download');
 //    ViewCampaignOnWebsiteController
 
 });

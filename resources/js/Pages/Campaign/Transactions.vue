@@ -22,10 +22,13 @@ watch(searchTerm, (value) => {
        return (transaction.name.toLowerCase().includes(value.toLowerCase())
          || transaction.transactionId.toLowerCase().includes(value.toLowerCase())
             || transaction.paymentMethod.toLowerCase().includes(value.toLowerCase())
-            || transaction.amount.toLowerCase().includes(value.toLowerCase())
        );
     });
 });
+
+const downloadExcelTransactions = () => {
+    window.open(route('campaign.download', {campaign: props.campaign.id}));
+}
 
 </script>
 
@@ -76,9 +79,9 @@ watch(searchTerm, (value) => {
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
                         >
-                            <Link href="/" class="bg-slate-600 p-2 px-4 text-white rounded">
+                            <button @click="downloadExcelTransactions" class="bg-slate-600 p-2 px-4 text-white rounded">
                                 <span>Baixar</span>
-                            </Link>
+                            </button>
                         </div>
                     </div>
                     <div class="overflow-x-auto">

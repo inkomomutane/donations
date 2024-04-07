@@ -54,7 +54,7 @@ const removeCampaign = () => {
 <template>
     <AuthenticatedLayout>
         <template v-slot:content>
-            <div class="mx-auto p-16">
+            <div class="mx-auto px-16">
                 <div class="flex  mb-5 justify-end">
                    <Link :href="route('campaign.transactions',{
                           campaign: campaign.id
