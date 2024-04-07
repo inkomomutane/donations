@@ -5,6 +5,7 @@ namespace App\Data;
 use App\Enums\CampaignEnum;
 use App\Enums\CampaignPriorityEnum;
 use App\Models\Campaign;
+use App\Models\CampaignTransaction;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
@@ -31,11 +32,15 @@ class CampaignData extends Data
         public readonly  Lazy|null|MediaData $media,
         #[DataCollectionOf(CampaignComment::class)]
         public readonly  DataCollection $comments,
+        /**
+         * @var TransactionData[] $transactions
+         */
+        public readonly  DataCollection $transactions
     ) {}
 
     public static function fromModel(Campaign $campaign) :self{
 
-        $campaign->loadMissing(['district','cause','postedBy','media' =>  function(MorphMany $morphMany){
+        $campaign->loadMissing(['district','cause','postedBy', 'transactions','media' =>  function(MorphMany $morphMany){
             $morphMany->where('collection_name','=','campaigns')->get();
         }]);
 
@@ -55,7 +60,8 @@ class CampaignData extends Data
             postedBy:Lazy::whenLoaded('postedBy',$campaign,static fn() => $campaign->postedBy->getData()
             ),
             media:MediaData::fromModel($campaign->getFirstMedia('campaigns')),
-            comments: CampaignComment::collection($campaign->campaignComments)
+            comments: CampaignComment::collection($campaign->campaignComments),
+            transactions: TransactionData::collection($campaign->transactions)
         );
     }
 

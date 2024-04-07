@@ -23,7 +23,7 @@ class UpdateCampaignController extends Controller
             \DB::commit();
             flash()->addSuccess('Campanha actualizada com sucesso');
         }catch (\Exception $exception){
-            throw  $exception;
+            #throw  $exception;
             flash()->addError('Erro ao actualizar campanha');
         }
 

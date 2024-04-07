@@ -120,4 +120,10 @@ class Campaign extends Model implements  HasMedia
     {
         $this->addMediaCollection('campaigns')->singleFile();
     }
+
+
+    public function transactions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(CampaignTransaction::class);
+    }
 }

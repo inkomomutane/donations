@@ -1,6 +1,7 @@
 <?php
 
 use App\Data\CampaignData;
+use App\Http\Controllers\Campaign\CampaignTransactionsController;
 use App\Http\Controllers\Campaign\DeleteCampaignController;
 use App\Http\Controllers\Campaign\EditCampaignController;
 use App\Http\Controllers\Campaign\PostCampaignCommentController;
@@ -83,6 +84,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/campaign/{campaign}/update', UpdateCampaignController::class)->name('campaign.update');
     Route::delete('/campaign/{campaign}/delete', DeleteCampaignController::class)->name('campaign.destroy');
     Route::get('/campaign/{cause}/show', ShowCampaignByCauseController::class)->name('campaign.show.cause');
+    Route::get('/campaign/{campaign}/transactions', CampaignTransactionsController::class)->name('campaign.transactions');
 //    ViewCampaignOnWebsiteController
 
 });

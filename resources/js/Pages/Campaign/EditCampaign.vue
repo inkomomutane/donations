@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ImageUploader from "@components/ImageUploader.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm,Link } from "@inertiajs/vue3";
 import { PropType } from "vue";
 import { vMaska } from "maska";
 
@@ -55,7 +55,18 @@ const removeCampaign = () => {
     <AuthenticatedLayout>
         <template v-slot:content>
             <div class="mx-auto p-16">
-                <div class="px-6 py-6 lg:p-14 bg-white">
+                <div class="flex  mb-5 justify-end">
+                   <Link :href="route('campaign.transactions',{
+                          campaign: campaign.id
+                   })" class="flex items-center  text-sm  gap-2 bg-emerald-900 text-white font-black p-2 px-4 rounded hover:bg-emerald-700">
+                       <svg class="w-6 h-6" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M39 6H9C7.34315 6 6 7.34315 6 9V39C6 40.6569 7.34315 42 9 42H39C40.6569 42 42 40.6569 42 39V9C42 7.34315 40.6569 6 39 6Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21 31L26 35L34 25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 15H34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 23L22 23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                       <span class="uppercase">
+                        Transações
+                    </span>
+                   </Link>
+                </div>
+                 <div class="px-6 py-6 lg:p-14 bg-white">
+
                     <div class="flex flex-row justify-between">
                         <div class="basis-1/4">
                             <h3
