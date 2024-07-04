@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ApplicationLogo from "@components/ApplicationLogo.vue";
 
-const appName = import.meta.env.VITE_APP_NAME;
+const appName = import.meta.env.APP_NAME;
 import { Link } from "@inertiajs/vue3";
 </script>
 
