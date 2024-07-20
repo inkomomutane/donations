@@ -50,7 +50,7 @@ window.addEventListener("scroll", function () {
         id="default-section"
         class="text-gray-600 body-font relative bg-gradient-to-b from-emerald-100 via-white to-emerald-100 pb-32"
     >
-        <form action="https://fabform.io/f/{form-id}" method="post">
+        <div>
             <div
                 class="container px-5 pb-24 mx-auto flex sm:flex-nowrap flex-wrap"
             >
@@ -90,7 +90,7 @@ window.addEventListener("scroll", function () {
                                 EMAIL
                             </h2>
                             <a class="text-emerald-500 leading-relaxed"
-                                >social@nepano.gov.mz</a
+                                >apoio@nndihpezembo.online</a
                             >
                             <h2
                                 class="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4"
@@ -158,7 +158,7 @@ window.addEventListener("scroll", function () {
                     </button>
                 </div>
             </div>
-        </form>
+        </div>
     </section>
 
     <Footer />

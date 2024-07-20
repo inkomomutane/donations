@@ -17,6 +17,9 @@ import logo from "@images/logo.png";
             </Link>
         </div>
 
+        <span class="text-white font-black text-2xl ">Ndihpezembo</span>
+        <span class="text-white font-black text-sm ">Plataforma de doações para ajuda humanitária</span>
+
         <div
             class="w-full sm:max-w-md mt-6 p-8 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg"
         >

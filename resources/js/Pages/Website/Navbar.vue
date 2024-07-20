@@ -1,5 +1,4 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
 import ApplicationLogo from "@components/ApplicationLogo.vue";
 defineProps({
     className: {
@@ -11,6 +10,7 @@ defineProps({
 const routeCampaignRoute = () => {
     return route().current("campaign.*") || route().current("web.campaigns");
 };
+
 
 const notRouteCampaignRoute = () => {
     return !route().current("campaign.*") || !route().current("web.campaigns");
@@ -25,7 +25,7 @@ const notRouteCampaignRoute = () => {
         <div
             class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
         >
-            <Link
+            <a
                 href="/"
                 class="flex items-center space-x-2 rtl:space-x-reverse"
             >
@@ -34,22 +34,17 @@ const notRouteCampaignRoute = () => {
                     class="text-emerald-800 self-center text-sm font-semibold  font-['Lexend_Deca'] whitespace-nowrap flex flex-col rtl:flex-row rtl:space-x-reverse"
                 >
                     <span>Ndihpezembo</span>
-                    <span class="text-emerald-900">Plataforma de doações para ajuda humanitária</span>
+                    <span class="text-emerald-900 hidden xl:flex">Plataforma de doações para ajuda humanitária</span>
                 </span>
-            </Link>
+            </a>
             <div
                 class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse font-['Anta']"
             >
-                <button
-                    type="button"
-                    class="bg-white text-emerald-900 hover:text-white hover:bg-emerald-600 hover:border-white duration-300 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded border border-emerald-950 text-sm px-4 py-2 text-center"
-                >
-                    Faça uma doação
-                </button>
+
                 <button
                     data-collapse-toggle="navbar-sticky"
                     type="button"
-                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                     aria-controls="navbar-sticky"
                     aria-expanded="false"
                 >
@@ -72,14 +67,14 @@ const notRouteCampaignRoute = () => {
                 </button>
             </div>
             <div
-                class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+                class="items-center justify-between hidden w-full lg:flex lg:w-auto md:order-1"
                 id="navbar-sticky"
             >
                 <ul
                     class="flex flex-col p-4 md:p-0 mt-4 font-bold font-['Anta'] border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0"
                 >
                     <li>
-                        <Link
+                        <a
                             href="/"
                             class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-emerald-700 md:p-0 md:dark:hover:text-emerald-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                             :class="{
@@ -90,11 +85,11 @@ const notRouteCampaignRoute = () => {
                             }"
                             aria-current="page"
                         >
-                            Início</Link
+                            Início</a
                         >
                     </li>
                     <li>
-                        <Link
+                        <a
                             :href="route('about')"
                             class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-emerald-700 md:p-0 md:dark:hover:text-emerald-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                             :class="{
@@ -105,10 +100,10 @@ const notRouteCampaignRoute = () => {
                             }"
                         >
                             Sobre nós
-                        </Link>
+                        </a>
                     </li>
                     <li>
-                        <Link
+                        <a
                             :href="route('web.campaigns')"
                             class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-emerald-700 md:p-0 md:dark:hover:text-emerald-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                             :class="{
@@ -119,10 +114,34 @@ const notRouteCampaignRoute = () => {
                             }"
                         >
                             Campanhas
-                        </Link>
+                        </a>
                     </li>
                     <li>
-                        <Link
+                        <a
+                            :href="route('web.succeeded.campaigns')"
+                            class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-emerald-700 md:p-0 md:dark:hover:text-emerald-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+
+
+                            :class="{
+                                'text-emerald-900 bg-left-bottom bg-gradient-to-r from-emerald-900 to-gold-emerald-950 bg-[length:90%_2px] bg-no-repeat':
+                                    route().current('web.succeeded.campaigns'),
+                                'text-gray-900 bg-left-bottom bg-gradient-to-r from-emerald-900 to-gold-emerald-950 bg-[length:0%_2px] hover:bg-[length:90%_2px] bg-no-repeat hover:duration-500':
+                                    !route().current('web.succeeded.campaigns'),
+                            }"
+                        >
+                            Campanhas concluídas
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href=""
+                            class="block py-2 px-3 rounded text-gray-900 bg-left-bottom bg-gradient-to-r from-emerald-900 to-gold-emerald-950 bg-[length:0%_2px] hover:bg-[length:90%_2px] bg-no-repeat hover:duration-500 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-emerald-700 md:p-0 md:dark:hover:text-emerald-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                        >
+                            Histórias de sucesso
+                        </a>
+                    </li>
+                    <li>
+                        <a
                             :href="route('contact')"
                             class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-emerald-700 md:p-0 md:dark:hover:text-emerald-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                             :class="{
@@ -133,10 +152,10 @@ const notRouteCampaignRoute = () => {
                             }"
                         >
                             Contacto
-                        </Link>
+                        </a>
                     </li>
                     <li v-if="route().current('policy')">
-                        <Link
+                        <a
                             :href="route('policy')"
                             class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-emerald-700 md:p-0 md:dark:hover:text-emerald-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                             :class="{
@@ -147,7 +166,7 @@ const notRouteCampaignRoute = () => {
                             }"
                         >
                             Política de privacidade
-                        </Link>
+                        </a>
                     </li>
                 </ul>
             </div>

@@ -56,10 +56,10 @@ window.addEventListener("scroll", function () {
                 <div
                     class="tracking-tight space-y-4 text-gray-900 leading-8 mb-4 prose max-w-full"
                 >
-                    <h1>Política de Privacidade do Nepano</h1>
+                    <h1>Política de Privacidade do Ndihpezembo</h1>
 
                     <p>
-                        A sua privacidade é uma prioridade para nós no Nepano.
+                        A sua privacidade é uma prioridade para nós no Ndihpezembo.
                         Estamos comprometidos em garantir que todas as
                         informações pessoais que você compartilha conosco sejam
                         tratadas com o máximo respeito e segurança. Esta
@@ -165,7 +165,7 @@ window.addEventListener("scroll", function () {
                     </ul>
 
                     <p>
-                        No Nepano, estamos comprometidos em proteger a sua
+                        No Ndihpezembo, estamos comprometidos em proteger a sua
                         privacidade e garantir a segurança das suas informações.
                         Se tiver alguma dúvida sobre esta política de
                         privacidade ou sobre como tratamos as suas informações,
@@ -178,7 +178,7 @@ window.addEventListener("scroll", function () {
                     class="tracking-tight space-y-4 text-gray-900 leading-8 mb-4"
                 >
                     Com o compromisso de estabelecer padrões elevados de
-                    integridade e prestação de contas, o Nepano se destaca como
+                    integridade e prestação de contas, o Ndihpezembo se destaca como
                     uma plataforma confiável e confiável para todos os doadores.
                     Nossa missão é proporcionar um ambiente seguro e
                     transparente onde cada contribuição faça uma diferença

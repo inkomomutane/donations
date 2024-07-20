@@ -90,7 +90,7 @@ const percentageOfGoal = (goal: number | null, current: number | null) => {
 };
 </script>
 <template>
-    <Head :title="campaign?.title" />
+    <Head :title="campaign?.title ?? ''" />
     <Navbar className="sticky top-0 bg-white " />
     <section
         class="bg-gradient-to-b from-emerald-50/10 via-emerald-100 to-gray-100"
@@ -159,6 +159,7 @@ const percentageOfGoal = (goal: number | null, current: number | null) => {
 
                                 <div>
                                     <button
+                                        v-if="campaign.status !== 'COMPLETA'"
                                         @click="openDonationModal(campaign)"
                                         class="m-t p-1.5 px-3 h-fit !w-fit bg-emerald-800 hover:bg-emerald-700 text-white text-sm rounded inline-flex items-center font-['Lexend_Deca'] justify-center gap-x-2 font-black"
                                     >
@@ -307,7 +308,7 @@ const percentageOfGoal = (goal: number | null, current: number | null) => {
     <div
         class="sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-emerald-950"
     >
-        <div class="p-6 lg:p-8 max-w-screen-2xl">
+        <div class="p-6 lg:p-8 max-w-screen-xl">
             <div
                 class="flex justify-center my-8 px-6 gap-x-4 sm:items-center sm:justify-between"
             >

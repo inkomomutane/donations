@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Transactions;
 
+use App\Enums\CampaignEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Campaign;
 use App\Models\CampaignTransaction;
@@ -24,6 +25,11 @@ class DonateToCampaignController extends Controller
 
     public function __invoke(Campaign $campaign,Request $request)
     {
+        if($campaign->status === CampaignEnum::COMPLETA()){
+            flash()->addWarning('Doação não permitida para campanhas completas.');
+            return redirect()->back();
+        }
+
         $reference = strtolower((\Str::substr(((string) \Str::ulid()),0,12)));
         $validatedData =$request->validate(
             $this->rules(),
@@ -70,7 +76,6 @@ class DonateToCampaignController extends Controller
             flash()->addSuccess('Doação feita com sucesso. \n Obrigado por fazer parte da comunidade.');
             return redirect()->back();
         } catch (Exception $exception) {
-            dd($exception);
             flash()->addError('Erro ao fazer a sua doação.');
             return redirect()->back();
         }

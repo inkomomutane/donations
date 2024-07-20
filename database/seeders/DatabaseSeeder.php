@@ -6,7 +6,10 @@ namespace Database\Seeders;
 use App\Models\Campaign;
 use App\Models\Cause;
 use App\Models\District;
+use App\Models\Organization;
 use App\Models\Province;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\MediaLibrary\HasMedia;
 
@@ -18,13 +21,36 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-         \App\Models\User::updateOrCreate([
+        Role::updateOrCreate([
+            'name' => 'admin'],[
+            'name' => 'admin',
+            ]
+        );
+
+        $superAdmin  = Role::updateOrCreate([
+            'name' => 'super-admin'],[
+            'name' => 'super-admin',
+            ]);
+
+         Role::updateOrCreate([
+            'name' => 'normal'],[
+            'name' => 'normal',
+            ]);
+
+         $adminUser = User::updateOrCreate([
              'email' => 'test@test.com'
          ],[
-             'name' => 'Test User',
-             'email' => 'test@test.com',
-             'password' => \Hash::make('password')
+             'name' => 'Itelvino Hugo',
+             'email' => 'itelvino@ndihpezembo.online',
+             'password' => \Hash::make('password'),
+             'organization_id' => Organization::updateOrCreate([
+                 'name' => 'Conselho Municipal da Beira'
+             ])->id
          ]);
+
+         $adminUser->assignRole($superAdmin);
+
+
 
          Province::updateOrCreate([
              'name' => 'Sofala'

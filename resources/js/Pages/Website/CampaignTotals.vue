@@ -7,14 +7,14 @@ defineProps({
 </script>
 
 <template>
-    <div id="default-section" class="bg-emerald-950 py-10 block">
-        <div class="max-w-screen-2xl mx-auto">
+    <div id="default-section" class="bg-emerald-950 py-5 block">
+        <div class="max-w-screen-xl mx-auto">
             <div
                 class="grid grid-cols-3 justify-between items-center font-['Lexend_Deca']"
             >
                 <div class="flex flex-col items-center space-x-2">
                     <h2
-                        class="text-base md:text-4xl text-yellow-200 font-black"
+                        class="text-base md:text-xl text-yellow-200 font-black"
                     >
                         {{ total_campaigns }}
                     </h2>
@@ -26,7 +26,7 @@ defineProps({
                 </div>
                 <div class="flex flex-col items-center space-x-2">
                     <h2
-                        class="text-base md:text-4xl text-yellow-200 font-black"
+                        class="text-base md:text-xl text-yellow-200 font-black"
                     >
                         {{ total_campaigns }}
                     </h2>
@@ -38,7 +38,7 @@ defineProps({
                 </div>
                 <div class="flex flex-col items-center space-x-2">
                     <h2
-                        class="text-base md:text-4xl text-yellow-200 font-black"
+                        class="text-base md:text-xl text-yellow-200 font-black"
                     >
                         {{ currencyFormatter(total_amount_raised ?? 0, "MZN") }}
                     </h2>

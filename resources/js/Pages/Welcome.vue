@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import { defineProps, PropType, ref, watch } from "vue";
 import CampaignData = App.Data.CampaignData;
 import Header from "@/Pages/Website/Header.vue";
@@ -109,7 +109,7 @@ watch(
     </div>
     <section class="bg-slate-100 md:pt-8">
         <div
-            class="max-w-screen-2xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
+            class="max-w-screen-xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
         >
             <div>
                 <div class="flex flex-row justify-center">
@@ -131,7 +131,7 @@ watch(
                 </div>
 
                 <div class="flex justify-end">
-                    <Link
+                    <a
                         :href="route('web.campaigns')"
                         class="inline-flex items-center justify-center px-5 py-3 mr-3 text-center rounded-sm bg-gradient-to-r from-teal-600 to-emerald-600 font-black text-white font-['Lexend_Deca'] hover:bg-emerald-400 focus:ring-4 focus:ring-primary-300 aos-init aos-animate"
                         data-aos="fade-down"
@@ -148,14 +148,14 @@ watch(
                                 d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                                 clip-rule="evenodd"
                             ></path></svg
-                    ></Link>
+                    ></a>
                 </div>
             </div>
         </div>
     </section>
     <section class="bg-gradient-to-b from-slate-50 to-emerald-100">
         <div
-            class="max-w-screen-2xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
+            class="max-w-screen-xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
         >
             <div>
                 <div class="flex flex-row justify-center">
@@ -177,7 +177,7 @@ watch(
                 </div>
 
                 <div class="flex justify-end">
-                    <Link
+                    <a
                         :href="route('web.campaigns')"
                         class="inline-flex items-center justify-center px-5 py-3 mr-3 text-center rounded-sm bg-gradient-to-r from-teal-600 to-emerald-600 font-black text-white font-['Lexend_Deca'] hover:bg-emerald-400 focus:ring-4 focus:ring-primary-300 aos-init aos-animate"
                         data-aos="fade-down"
@@ -194,14 +194,14 @@ watch(
                                 d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                                 clip-rule="evenodd"
                             ></path></svg
-                    ></Link>
+                    ></a>
                 </div>
             </div>
         </div>
     </section>
     <section class="bg-gradient-to-b from-emerald-50 to-slate-100 md:pt-8">
         <div
-            class="max-w-screen-2xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
+            class="max-w-screen-xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
         >
             <div>
                 <div class="flex flex-row justify-center">
@@ -223,7 +223,7 @@ watch(
                 </div>
 
                 <div class="flex justify-end">
-                    <Link
+                    <a
                         :href="route('web.campaigns')"
                         class="inline-flex items-center justify-center px-5 py-3 mr-3 text-center rounded-sm bg-gradient-to-r from-teal-600 to-emerald-600 font-black text-white font-['Lexend_Deca'] hover:bg-emerald-400 focus:ring-4 focus:ring-primary-300 aos-init aos-animate"
                         data-aos="fade-down"
@@ -240,7 +240,7 @@ watch(
                                 d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                                 clip-rule="evenodd"
                             ></path></svg
-                    ></Link>
+                    ></a>
                 </div>
             </div>
         </div>

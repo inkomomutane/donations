@@ -32,7 +32,7 @@ const inactiveClass = ref(
                 <Link href="/" class="flex items-center">
                     <ApplicationLogo class="w-11 fill-current text-gray-500" />
                     <span class="text-white text-2xl font-bold mx-2"
-                        >GOV</span
+                        >Ndihpezembo</span
                     >
                 </Link>
             </div>
@@ -53,8 +53,7 @@ const inactiveClass = ref(
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 512 512"
                     >
-                        <!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
-                        <path
+                      <path
                             d="M32 32c17.7 0 32 14.3 32 32V400c0 8.8 7.2 16 16 16H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-44.2 0-80-35.8-80-80V64C0 46.3 14.3 32 32 32zM160 224c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V256c0-17.7 14.3-32 32-32zm128-64V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V160c0-17.7 14.3-32 32-32s32 14.3 32 32zm64 32c17.7 0 32 14.3 32 32v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32zM480 96V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V96c0-17.7 14.3-32 32-32s32 14.3 32 32z"
                         ></path>
                     </svg>
@@ -251,6 +250,35 @@ const inactiveClass = ref(
                     </svg>
 
                     <span class="mx-4 font-bold text-base">Causas</span>
+                </Link>
+                <Link
+                    v-if="$page.props.userData.isSuperAdmin"
+                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
+                    :class="[
+                        route().current('user.all')
+                            ? activeClass
+                            : inactiveClass,
+                    ]"
+                    :href="route('user.all')"
+                >
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"></path>
+                    </svg>
+
+                    <span class="mx-4 font-bold text-base">Usuários</span>
+                </Link>
+                <Link
+                    v-if="$page.props.userData.isSuperAdmin"
+                    class="flex items-center px-4 py-2.5 mx-3 duration-200 rounded-sm"
+                    :class="[
+                        route().current('organization.list')
+                            ? activeClass
+                            : inactiveClass,
+                    ]"
+                    :href="route('organization.list')"
+                >
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="20.01 10.99 18.51 10.99 13.01 10.99 13.01 8.99 11.01 8.99 11.01 10.99 5.47 10.99 4.01 10.99 3.47 10.99 3.47 14.99 5.47 14.99 5.47 12.99 11.01 12.99 11.01 14.99 13.01 14.99 13.01 12.99 18.51 12.99 18.51 14.99 20.51 14.99 20.51 10.99 20.01 10.99"></polygon><circle cx="12.01" cy="4.51" r="2.5"></circle><circle cx="4.47" cy="19.49" r="2.5"></circle><circle cx="12.01" cy="19.49" r="2.5"></circle><circle cx="19.51" cy="19.49" r="2.5"></circle></svg>
+                    <span class="mx-4 font-bold text-base">Organizações</span>
                 </Link>
             </nav>
         </div>

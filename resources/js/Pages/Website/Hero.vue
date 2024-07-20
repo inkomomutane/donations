@@ -9,18 +9,18 @@ import header from "@images/header.png";
         <div class="absolute inset-0 bg-black opacity-0"></div>
         <div class="relative px-4 mx-auto max-w-screen-xxl lg:px-32">
             <div
-                class="grid max-w-screen-xxl px-4 py-8 mx-auto lg:gap-8 xxl:gap-0 lg:py-16 lg:px-8 lg:grid-cols-12"
+                class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xxl:gap-0 lg:py-16 lg:px-8 lg:grid-cols-12"
             >
                 <div
                     class="mr-auto place-self-center lg:col-span-6 tracking-tight p-8"
                 >
                     <h2
-                        class="max-w-2xl font-['Lexend_Deca'] mb-4 text-2xl font-black tracking-tight leading-none md:text-3xl 2xl:text-5xl first-letter:uppercase aos-init aos-animate text-teal-900"
+                        class="max-w-xl font-['Lexend_Deca'] mb-4 text-2xl font-black tracking-tight leading-none md:text-3xl 2xl:text-5xl first-letter:uppercase aos-init aos-animate text-teal-900"
                         data-aos="fade-down"
                     >
                         — Torne-se parte da comunidade que faz a
                         <div
-                            class="bg-gradient-to-r from-teal-600 to-emerald-800 lg:skew-y-3 rounded-md my-4 w-fit lg:rounded-tl-3xl lg:rounded-br-3xl font-['Black_Ravens'] tracking-widest font-light px-3 text-white"
+                            class="bg-gradient-to-r from-teal-600 to-emerald-800 lg:skew-y-3 rounded-md my-4 w-fit lg:rounded-tl-2xl lg:rounded-br-3xl font-['Black_Ravens'] tracking-widest font-light px-3 text-white"
                         >
                             diferença.
                         </div>
@@ -39,7 +39,7 @@ import header from "@images/header.png";
                         faça a diferença.
                     </p>
                     <a
-                        href="/"
+                        :href="route('about')"
                         class="inline-flex items-center justify-center px-5 py-3 mr-3 text-center rounded-sm bg-gradient-to-r from-teal-600 to-emerald-600 font-black text-white font-['Lexend_Deca'] hover:bg-emerald-400 focus:ring-4 focus:ring-primary-300 aos-init aos-animate"
                         data-aos="fade-down"
                     >

@@ -16,6 +16,10 @@ use App\Http\Controllers\District\CreateDistrict;
 use App\Http\Controllers\District\DeleteDistrict;
 use App\Http\Controllers\District\GetDistricts;
 use App\Http\Controllers\District\UpdateDistrict;
+use App\Http\Controllers\Organization\DeleteOrganizationController;
+use App\Http\Controllers\Organization\ListOrganizationsController;
+use App\Http\Controllers\Organization\StoreOrganizationController;
+use App\Http\Controllers\Organization\UpdateOrganizationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Transactions\DonateToCampaignController;
 use App\Models\Campaign;
@@ -41,6 +45,18 @@ Route::get('/dashboard',\App\Http\Controllers\Campaign\GetCampaignsController::c
 
 Route::middleware(['auth','verified'])->group(function () {
 
+    // users
+
+    Route::get('/users',\App\Http\Controllers\User\GetUsers::class)->name('user.all');
+    Route::post('/user/store',\App\Http\Controllers\User\CreateUser::class)->name('user.store');
+    Route::match(['put','patch'],'/user/{user}/update',\App\Http\Controllers\User\UpdateUser::class)->name('user.update');
+    Route::delete('/user/{user}/delete',\App\Http\Controllers\User\DeleteUser::class)->name('user.delete');
+
+
+    Route::get('/organization/list', ListOrganizationsController::class)->name('organization.list');
+    Route::post('/organization/store', StoreOrganizationController::class)->name('organization.store');
+    Route::match(['put','patch'],'/organization/{organization}/update', UpdateOrganizationController::class)->name('organization.update');
+    Route::delete('/organization/{organization}/delete', DeleteOrganizationController::class)->name('organization.delete');
 //    ReportController
 
     Route::get('/reports', ReportController::class)->name('reports');
@@ -99,5 +115,6 @@ Route::get('/about-us',static fn() => Inertia::render('Website/about_us/AboutUs'
 Route::get('/contact',static fn() => Inertia::render('Website/contact/Contact') )->name('contact');
 Route::get('/policy',static fn() => Inertia::render('Website/Policy/Policy') )->name('policy');
 Route::get('/all-campaigns',\App\Http\Controllers\Campaign\GetAllCampaignsController::class)->name('web.campaigns');
+Route::get('/succeeded-campaigns',\App\Http\Controllers\Campaign\GetAllSucceededCampaignsController::class)->name('web.succeeded.campaigns');
 
 require __DIR__.'/auth.php';

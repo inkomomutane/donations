@@ -118,7 +118,7 @@ class Campaign extends Model implements  HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('campaigns')->singleFile();
+        $this->addMediaCollection('campaigns');
     }
 
 

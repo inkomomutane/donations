@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import ApplicationLogo from "@components/ApplicationLogo.vue";
-
-const appName = import.meta.env.APP_NAME;
-import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
     <div
         class="sm:flex sm:justify-center sm:items-center bg-dots-darker bg-center bg-emerald-950 bottom-0"
     >
-        <div class="p-6 lg:p-8 max-w-screen-2xl">
+        <div class="p-6 lg:p-8 max-w-screen-xl">
             <div
                 class="flex justify-center my-8 px-6 gap-x-4 sm:items-center sm:justify-between"
             >
@@ -30,8 +27,7 @@ import { Link } from "@inertiajs/vue3";
                     class="ms-4 text-center text-sm text-white dark:text-gray-400 sm:text-end sm:ms-0"
                 >
                     Copyright ©
-                    <strong class="font-black font-['Lexend_Deca']">
-                        {{ appName }}</strong
+                    <strong class="font-black font-['Lexend_Deca']"> Ndihpezembo </strong
                     >
                     | {{ new Date().getFullYear() }}. Todos os direitos
                     reservados.
@@ -39,9 +35,9 @@ import { Link } from "@inertiajs/vue3";
                 <div
                     class="ms-4 text-center text-sm text-white dark:text-gray-400 sm:text-end sm:ms-0"
                 >
-                    <Link :href="route('policy')" class="hover:underline">
+                    <a :href="route('policy')" class="hover:underline">
                         Políticas de privacidade
-                    </Link>
+                    </a>
                 </div>
             </div>
         </div>

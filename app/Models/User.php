@@ -10,12 +10,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\LaravelData\WithData;
+use Spatie\Permission\Traits\HasPermissions;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasUlids,WithData;
+    use HasPermissions,HasRoles;
 
     protected  string $dataClass = UserData::class;
+
+    protected $with = ['organization','roles'];
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +31,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'organization_id'
     ];
 
     /**
@@ -52,4 +58,9 @@ class User extends Authenticatable
     {
 		return $this->hasMany(Campaign::class, 'posted_by_id');
 	}
+
+    public function organization(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
+    }
 }

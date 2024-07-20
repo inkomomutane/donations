@@ -1,3 +1,5 @@
+import UserData = App.Data.UserData;
+
 export interface PaginatedData {
     data: Array;
     links: Array;
@@ -41,7 +43,10 @@ export interface Districts extends Omit<PaginatedData, "data"> {
 export interface Campaigns extends Omit<PaginatedData, "data"> {
     data: Array<App.Data.CampaignData>;
 }
-
+//Organizations
+export interface Organizations extends Omit<PaginatedData, "data"> {
+    data: Array<App.Data.OrganizationData>;
+}
 export interface User {
     id: number;
     name: string;
@@ -55,4 +60,5 @@ export type PageProps<
     auth: {
         user: User;
     };
+    userData: UserData
 };

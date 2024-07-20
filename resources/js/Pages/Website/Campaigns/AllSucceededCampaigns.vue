@@ -10,9 +10,9 @@ import Footer from "@/Pages/Website/Footer.vue";
 import Navbar from "@/Pages/Website/Navbar.vue";
 import {Campaigns} from "@/types";
 const props = defineProps({
-    campaigns: {
-        type: Object as PropType<Campaigns>,
-        required:true
+    campaigns:{
+      type: Object as PropType<Campaigns>,
+        required:true,
     },
     causes: Array<App.Data.CauseData>,
     messages: Object as PropType<FlasherResponse>,
@@ -122,7 +122,7 @@ watch(
     () => campaignSearch,
     (value) => {
         router.visit(
-            route("web.campaigns", {
+            route("web.suceeded.campaigns", {
                 search: value.value,
             }),
             {
@@ -204,8 +204,8 @@ watch(
                 >
                     <CampaignCard
                         @donate="openDonationModal(campaign)"
-                        v-for="campaign in campaigns.data"
-                        :key="campaign.id"
+                        v-for="(campaign,index) in campaigns.data"
+                        :key="campaign.id ?? index "
                         :campaign="campaign"
                     />
                 </div>
@@ -220,7 +220,7 @@ watch(
                     Mostrando
                     <span
                         class="font-semibold text-emerald-900 dark:text-white"
-                        >{{
+                    >{{
                             `${campaigns.meta.from ?? 0}-${
                                 campaigns.meta.to ?? 0
                             }`
@@ -241,14 +241,14 @@ watch(
                         <a
                             href=""
                             class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
-                            >&laquo; Anterior
+                        >&laquo; Anterior
                         </a>
                     </li>
                     <li v-else>
                         <a
                             class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                             :href="links[0].url ?? ''"
-                            >&laquo; Anterior
+                        >&laquo; Anterior
                         </a>
                     </li>
                     <li v-for="link in links.slice(1, -1)" :key="link.label">
@@ -256,7 +256,7 @@ watch(
                             class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                             v-if="!link.active"
                             :href="link.url ?? ''"
-                            >{{ link.label }}
+                        >{{ link.label }}
                         </a>
                         <span
                             class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 border border-emerald-300 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
@@ -266,7 +266,7 @@ watch(
                                     ? 'bg-emerald-700 dark:bg-slate-600 text-white dark:text-slate-100'
                                     : ''
                             }`"
-                            >{{ link.label }}</span
+                        >{{ link.label }}</span
                         >
                     </li>
                     <li
@@ -275,7 +275,7 @@ watch(
                     >
                         <span
                             class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white rounded-r-lg border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
-                            >Próximo &raquo;</span
+                        >Próximo &raquo;</span
                         >
                     </li>
                     <li
@@ -283,7 +283,7 @@ watch(
                         class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white rounded-r-lg border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                     >
                         <a :href="links.slice(-1)[0].url ?? ''"
-                            >Próximo &raquo;</a
+                        >Próximo &raquo;</a
                         >
                     </li>
                 </ul>
@@ -320,7 +320,7 @@ watch(
                     Fazer uma doação para: <br />
                     <span
                         class="text-emerald-900 dark:text-white font-bold font-['Lexend_Deca']"
-                        >{{ campaignToDonate?.title }}</span
+                    >{{ campaignToDonate?.title }}</span
                     >
                 </h3>
                 <div class="space-y-6">
@@ -328,7 +328,7 @@ watch(
                         <label
                             for="name"
                             class="block mb-2 text-sm font-medium text-emerald-900 dark:text-white"
-                            >Nome (anónimo)</label
+                        >Nome (anónimo)</label
                         >
                         <input
                             type="text"
@@ -339,14 +339,14 @@ watch(
                             placeholder="Nome do doador (opcional)"
                         />
                         <span class="text-medium text-red-500 font-semibold">{{
-                            form.errors.name
-                        }}</span>
+                                form.errors.name
+                            }}</span>
                     </div>
                     <div>
                         <label
                             for="name"
                             class="block mb-2 text-sm font-medium text-emerald-900 dark:text-white"
-                            >Contacto (MPESA)</label
+                        >Contacto (MPESA)</label
                         >
                         <input
                             type="text"
@@ -357,14 +357,14 @@ watch(
                             placeholder="Contacto (MPESA)"
                         />
                         <span class="text-medium text-red-500 font-semibold">{{
-                            form.errors.phone
-                        }}</span>
+                                form.errors.phone
+                            }}</span>
                     </div>
                     <div>
                         <label
                             for="amount"
                             class="block mb-2 text-sm font-medium text-emerald-900 dark:text-white"
-                            >Valor a doar</label
+                        >Valor a doar</label
                         >
                         <input
                             type="text"
@@ -375,8 +375,8 @@ watch(
                             placeholder="Valor a doar"
                         />
                         <span class="text-medium text-red-500 font-semibold">{{
-                            form.errors.amount
-                        }}</span>
+                                form.errors.amount
+                            }}</span>
                     </div>
 
                     <button

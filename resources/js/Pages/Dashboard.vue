@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, router } from "@inertiajs/vue3";
+import { Head, router } from "@inertiajs/vue3";
 import CreateCampaign from "@/Pages/Campaign/CreateCampaign.vue";
 import { onMounted, PropType, ref, watch } from "vue";
 import { FlasherResponse } from "@flasher/flasher";
 import Flasher from "@/helprs";
+import {Campaigns} from "@/types";
 
 const props = defineProps({
     causes: {
@@ -24,7 +25,8 @@ const props = defineProps({
         required: true,
     },
     campaigns: {
-        type: Object,
+        type: Object as PropType<Campaigns>,
+        required :true
     },
     messages: Object as PropType<FlasherResponse>,
 });
@@ -117,7 +119,7 @@ watch(
                                 placeholder="Pesquisar campanha..."
                             />
                         </div>
-                        <Link
+                        <a
                             :href="
                                 route('campaign.edit', {
                                     campaign: campaign.id,
@@ -247,7 +249,7 @@ watch(
                                     </div>
                                 </div>
                             </article>
-                        </Link>
+                        </a>
                     </main>
                 </div>
                 <nav
@@ -278,29 +280,29 @@ watch(
                             v-if="links[0].active"
                             class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                         >
-                            <Link
+                            <a
                                 href=""
                                 class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                                 >&laquo; Anterior
-                            </Link>
+                            </a>
                         </li>
                         <li v-else>
-                            <Link
+                            <a
                                 class="flex rounded-l-lg items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                                 :href="links[0].url ?? ''"
                                 >&laquo; Anterior
-                            </Link>
+                            </a>
                         </li>
                         <li
                             v-for="link in links.slice(1, -1)"
                             :key="link.label"
                         >
-                            <Link
+                            <a
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                                 v-if="!link.active"
                                 :href="link.url ?? ''"
                                 >{{ link.label }}
-                            </Link>
+                            </a>
                             <span
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 border border-emerald-300 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                                 v-else
@@ -325,8 +327,8 @@ watch(
                             v-else
                             class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-emerald-500 bg-white rounded-r-lg border border-emerald-300 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-800 dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-700 dark:hover:text-white"
                         >
-                            <Link :href="links.slice(-1)[0].url ?? ''"
-                                >Próximo &raquo;</Link
+                            <a :href="links.slice(-1)[0].url ?? ''"
+                                >Próximo &raquo;</a
                             >
                         </li>
                     </ul>

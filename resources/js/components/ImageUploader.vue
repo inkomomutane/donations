@@ -5,7 +5,7 @@
             @uploader="uploader"
             :multiple="multiple"
             :accept="mediaType"
-            :maxFileSize="59000000"
+            :maxFileSize="80000000000000"
             @select="onSelectedFiles"
             :disabled="progressUploadImage"
             :file-limit="multiple ? fileLimit : 1"
