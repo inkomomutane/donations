@@ -56,12 +56,12 @@ window.addEventListener("scroll", function () {
                 <h1
                     class="font-['Lexend_Deca'] mb-4 text-xl font-black tracking-tight leading-none md:text-2xl 2xl:text-3xl first-letter:uppercase aos-init aos-animate text-teal-900"
                 >
-                    — Sobre o Nepano
+                    — Sobre o Ndihpezembo
                 </h1>
                 <p
                     class="tracking-tight space-y-4 text-gray-900 leading-8 mb-4"
                 >
-                    O Nepano é uma iniciativa inovadora, liderada pelo governo,
+                    O Ndihpezembo é uma iniciativa inovadora, liderada pelo governo,
                     que surge como resposta à crescente necessidade de
                     regulamentação e segurança nas doações para campanhas de
                     solidariedade. Desde sua fundação em 2023, na vibrante
@@ -74,7 +74,7 @@ window.addEventListener("scroll", function () {
                     class="tracking-tight space-y-4 text-gray-900 leading-8 mb-4"
                 >
                     Com o compromisso de estabelecer padrões elevados de
-                    integridade e prestação de contas, o Nepano se destaca como
+                    integridade e prestação de contas, o Ndihpezembo se destaca como
                     uma plataforma confiável e confiável para todos os doadores.
                     Nossa missão é proporcionar um ambiente seguro e
                     transparente onde cada contribuição faça uma diferença
@@ -143,7 +143,7 @@ window.addEventListener("scroll", function () {
                 <p
                     class="tracking-tight space-y-4 text-gray-900 leading-8 mb-4"
                 >
-                    No Nepano, estamos comprometidos com a transparência em
+                    No Ndihpezembo, estamos comprometidos com a transparência em
                     todas as nossas operações. Nossa plataforma proporciona aos
                     doadores a garantia de que seus recursos serão utilizados de
                     forma ética e responsável, com prestação de contas total em
