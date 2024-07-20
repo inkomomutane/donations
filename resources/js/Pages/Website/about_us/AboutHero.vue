@@ -19,7 +19,7 @@
                         — Um breve historial sobre nós a
                         <span
                             class="bg-gradient-to-r from-teal-600 to-emerald-800 lg:skew-y-3 rounded-md my-4 w-fit lg:rounded-tl-3xl lg:rounded-br-3xl font-['Black_Ravens'] tracking-widest font-light px-3 text-white"
-                            >Nepano.</span
+                            >Ndihpezembo.</span
                         >
                     </h2>
                     <h1
