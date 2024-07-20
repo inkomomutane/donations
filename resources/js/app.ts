@@ -14,7 +14,7 @@ import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import "vs-vue3-select/dist/vs-vue3-select.css";
 import PrimeVue from "primevue/config";
 import.meta.glob(["../images/**", "../fonts/**"]);
-const appName = import.meta.env.VITE_APP_NAME || "Nepano";
+const appName = "Ndihpezembo";
 import "@/components/select/select.css";
 
 //fonts,images
