@@ -35,7 +35,7 @@ jobs:
       - name: Upload Build to FTP SERVER Ndihpezembo
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
-          server: 'ndihpezembo.online'
+          server: 'ftp.ndihpezembo.online'
           username: 'u573755972.ndihpezembo'
           password: 'Au573755972@2024'
           local-dir: ./public/build/
