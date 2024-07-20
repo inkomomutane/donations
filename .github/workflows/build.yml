@@ -18,25 +18,15 @@ jobs:
           coverage: none
       - name: Run composer install
         run: composer install -n --prefer-dist
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-      - name: Build project
-        run: npm run build
+  deployAssets:
+    name: Deploy
+    needs: buildAssets
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
 
-      - name: Upload production-ready build files
-        uses: actions/upload-artifact@v2
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
         with:
-          name: ndihpezembo build files
+          name: mimovel-production-files
           path: ./public/build
-      - name: Upload Build to FTP SERVER Ndihpezembo
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
-        with:
-          server: 'ftp.ndihpezembo.online'
-          username: 'u573755972.ndihpezembo'
-          password: 'Au573755972@2024'
-          local-dir: ./public/build/
-          server-dir: ./build/
