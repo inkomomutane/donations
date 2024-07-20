@@ -29,12 +29,12 @@ const notRouteCampaignRoute = () => {
                 href="/"
                 class="flex items-center space-x-2 rtl:space-x-reverse"
             >
-              <ApplicationLogo  className="w-10 h-auto fill-emerald-100" />
+              <ApplicationLogo  className="w-8 h-auto fill-emerald-100" />
                 <span
                     class="text-emerald-800 self-center text-sm font-semibold  font-['Lexend_Deca'] whitespace-nowrap flex flex-col rtl:flex-row rtl:space-x-reverse"
                 >
-                    <span>Governo distrital de Sofala</span>
-                    <span class="text-emerald-900">Solidário</span>
+                    <span>Ndihpezembo</span>
+                    <span class="text-emerald-900">Plataforma de doações para ajuda humanitária</span>
                 </span>
             </Link>
             <div
