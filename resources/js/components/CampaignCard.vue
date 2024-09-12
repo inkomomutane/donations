@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Header from "@/Pages/Website/Header.vue";
 import { PropType } from "vue";
-import { Link } from "@inertiajs/vue3";
 import { currencyFormatter, numberMoneyFormat } from "@/helprs";
 
 defineProps({
@@ -29,7 +28,7 @@ const percentageOfGoal = (goal: number | null, current: number | null) => {
     <article
         class="!w-full rounded-3xl rounded-b-xl bg-white dark:bg-gray-700 dark:border-gray-700 transition-transform duration-300 transform-gpu hover:scale-105 hover:shadow-none hover:shadow-gray-400"
     >
-        <Link
+        <a
             :href="
                 route('campaign.view', {
                     campaign: campaign.id,
@@ -56,7 +55,7 @@ const percentageOfGoal = (goal: number | null, current: number | null) => {
                     controls
                 ></video>
             </header>
-        </Link>
+        </a>
 
         <div
             class="w-full p-4 pb-5 text-emerald-950 grid justify-items-stretch col-span-3"
@@ -116,9 +115,9 @@ const percentageOfGoal = (goal: number | null, current: number | null) => {
                     }}
                 </div>
                 <div class="col-span-2 inline-flex items-center justify-start text-center font-['Roboto'] font-medium rounded-sm gap-x-3">
-                    <Link :href="`https://twitter.com/share?text=${route('campaign.view', {campaign: campaign.id})}`" class="bg-emerald-50 p-2 hover:text-black hover:bg-black/10 duration-100  hover:scale-105">
+                    <a :href="`https://twitter.com/share?text=${route('campaign.view', {campaign: campaign.id})}`" class="bg-emerald-50 p-2 hover:text-black hover:bg-black/10 duration-100  hover:scale-105">
                         <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="currentColor"><title>X</title><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg>
-                    </Link>
+                    </a>
                     <a :href="`https://www.facebook.com/sharer/sharer.php?u=${route('campaign.view', {campaign: campaign.id})}`" class="bg-emerald-50 p-2 hover:text-blue-600 hover:bg-blue-100 duration-100  hover:scale-105">
                         <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill="currentColor" fill-rule="evenodd" d="M18.8961111,0 L1.10388889,0 C0.494166667,0 0,0.494166667 0,1.10388889 L0,18.8963889 C0,19.5058333 0.494166667,20 1.10388889,20 L10.6825,20 L10.6825,12.255 L8.07611111,12.255 L8.07611111,9.23666667 L10.6825,9.23666667 L10.6825,7.01055556 C10.6825,4.42722222 12.2602778,3.02083333 14.5647222,3.02083333 C15.6686111,3.02083333 16.6172222,3.10277778 16.8938889,3.13972222 L16.8938889,5.83944444 L15.2955556,5.84027778 C14.0422222,5.84027778 13.7997222,6.43583333 13.7997222,7.30972222 L13.7997222,9.23694444 L16.7886111,9.23694444 L16.3994444,12.2552778 L13.7997222,12.2552778 L13.7997222,20 L18.8963889,20 C19.5058333,20 20,19.5058333 20,18.8961111 L20,1.10388889 C20,0.494166667 19.5058333,0 18.8961111,0 L18.8961111,0 Z"></path></svg>
                     </a>
