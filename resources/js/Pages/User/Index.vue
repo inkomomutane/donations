@@ -176,7 +176,7 @@ function closeDeleteUserModal() {
                                         Editar
                                     </th>
                                     <th scope="col" class="px-4 py-3">
-                                        Excluir
+                                        Acesso
                                     </th>
                                 </tr>
                             </thead>
@@ -261,7 +261,11 @@ function closeDeleteUserModal() {
                                         <button
                                             type="button"
                                             @click="openDeleteUserModal(user)"
-                                            class="bg-red-500 hover:bg-red-700 flex items-center justify-center text-white focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
+                                            :class="{
+                                                'bg-red-500 hover:bg-red-700' : user.active,
+                                                'bg-green-500 hover:bg-green-700': !user.active
+                                            }"
+                                            class=" flex items-center justify-center text-white focus:ring-4 focus:ring-slate-300 font-medium rounded text-sm px-4 py-2 dark:bg-slate-600 dark:hover:bg-slate-700 focus:outline-none dark:focus:ring-slate-800"
 
                                         >
                                             <svg

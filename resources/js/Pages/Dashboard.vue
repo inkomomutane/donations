@@ -2,7 +2,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, router } from "@inertiajs/vue3";
 import CreateCampaign from "@/Pages/Campaign/CreateCampaign.vue";
-import { onMounted, PropType, ref, watch } from "vue";
+import {  PropType, ref, watch } from "vue";
 import { FlasherResponse } from "@flasher/flasher";
 import Flasher from "@/helprs";
 import {Campaigns} from "@/types";
@@ -221,7 +221,7 @@ watch(
                                         >
                                             <small class="font-black"
                                                 >Total:&nbsp;{{
-                                                    campaign.goalAmount ?? 0
+                                                    campaign.currentAmount ?? 0
                                                 }}
                                             </small>
                                         </div>

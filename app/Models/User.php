@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Data\UserData;
+use App\Models\Scopes\ActiveUser;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,6 +15,7 @@ use Spatie\LaravelData\WithData;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 
+#[ScopedBy(ActiveUser::class)]
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasUlids,WithData;
@@ -21,6 +24,10 @@ class User extends Authenticatable
     protected  string $dataClass = UserData::class;
 
     protected $with = ['organization','roles'];
+
+
+
+
 
     /**
      * The attributes that are mass assignable.

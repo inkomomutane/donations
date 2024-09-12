@@ -109,7 +109,7 @@ watch(
     </div>
     <section class="bg-slate-100 md:pt-8">
         <div
-            class="max-w-screen-xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
+            class="max-w-screen-lg xl:max-w-screen-xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
         >
             <div>
                 <div class="flex flex-row justify-center">
@@ -155,7 +155,7 @@ watch(
     </section>
     <section class="bg-gradient-to-b from-slate-50 to-emerald-100">
         <div
-            class="max-w-screen-xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
+            class="max-w-screen-lg xl:max-w-screen-xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
         >
             <div>
                 <div class="flex flex-row justify-center">
@@ -201,7 +201,7 @@ watch(
     </section>
     <section class="bg-gradient-to-b from-emerald-50 to-slate-100 md:pt-8">
         <div
-            class="max-w-screen-xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
+            class="max-w-screen-lg xl:max-w-screen-xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
         >
             <div>
                 <div class="flex flex-row justify-center">

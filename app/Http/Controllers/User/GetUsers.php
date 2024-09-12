@@ -5,6 +5,7 @@ use App\Data\OrganizationData;
 use App\Data\RoleData;
 use App\Data\UserData;
 use App\Models\Organization;
+use App\Models\Scopes\ActiveUser;
 use App\Models\User;
 use Auth;
 use Inertia\Inertia;
@@ -17,6 +18,7 @@ class GetUsers
     {
         return UserData::collection(
             User::query()
+                ->withoutGlobalScope(ActiveUser::class)
                 ->when($term, function ($query, $search) {
                     $query->whereAny(['name','email'], 'like', '%'.$search.'%');
                     $query->with('roles');

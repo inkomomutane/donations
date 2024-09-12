@@ -5,6 +5,8 @@ use App\Http\Controllers\Campaign\CampaignTransactionsController;
 use App\Http\Controllers\Campaign\DeleteCampaignController;
 use App\Http\Controllers\Campaign\DownloadTransactionExcelController;
 use App\Http\Controllers\Campaign\EditCampaignController;
+use App\Http\Controllers\Campaign\GetAllCampaignsController;
+use App\Http\Controllers\Campaign\GetAllSucceededCampaignsController;
 use App\Http\Controllers\Campaign\PostCampaignCommentController;
 use App\Http\Controllers\Campaign\ReportController;
 use App\Http\Controllers\Campaign\ShowCampaignByCauseController;
@@ -114,7 +116,7 @@ Route::post('/campaign/{campaign}/comment', PostCampaignCommentController::class
 Route::get('/about-us',static fn() => Inertia::render('Website/about_us/AboutUs') )->name('about');
 Route::get('/contact',static fn() => Inertia::render('Website/contact/Contact') )->name('contact');
 Route::get('/policy',static fn() => Inertia::render('Website/Policy/Policy') )->name('policy');
-Route::get('/all-campaigns',\App\Http\Controllers\Campaign\GetAllCampaignsController::class)->name('web.campaigns');
-Route::get('/succeeded-campaigns',\App\Http\Controllers\Campaign\GetAllSucceededCampaignsController::class)->name('web.succeeded.campaigns');
+Route::get('/all-campaigns', GetAllCampaignsController::class)->name('web.campaigns');
+Route::get('/succeeded-campaigns', GetAllSucceededCampaignsController::class)->name('web.succeeded.campaigns');
 
 require __DIR__.'/auth.php';

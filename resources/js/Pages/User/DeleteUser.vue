@@ -62,13 +62,25 @@ const deleteUser = () => {
                 <span class="sr-only">Fechar</span>
             </button>
             <div class="px-6 py-6 lg:px-8">
+
+                <h1>Acesso de usuário</h1>
                 <form class="space-y-6" @submit.prevent="deleteUser">
                     <button
                         type="submit"
+                        v-if="!user.active"
+                        class="w-full  bg-green-500 hover:bg-green-600  focus:ring-green-300 mt-8 text-white focus:ring-4 focus:outline-none font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-800 dark:focus:ring-slate-200"
+                    >
+
+                        <span >Habilitar</span>
+                    </button>
+
+                    <button
+                        type="submit"
+                        v-else
                         class="w-full  bg-red-500 hover:bg-red-600  focus:ring-red-300 mt-8 text-white focus:ring-4 focus:outline-none font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-800 dark:focus:ring-slate-200"
                     >
 
-                        <span >Deletar usuário.</span>
+                        <span >Desabilitar</span>
                     </button>
                 </form>
             </div>

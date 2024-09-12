@@ -13,6 +13,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use RalphJSmit\Laravel\SEO\Schema\BreadcrumbListSchema;
+use RalphJSmit\Laravel\SEO\SchemaCollection;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
+use RalphJSmit\Laravel\SEO\Support\ImageMeta;
+use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Spatie\LaravelData\WithData;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -25,6 +31,7 @@ class Campaign extends Model implements  HasMedia
     use HasFactory;
     use WithData;
     use InteractsWithMedia;
+    use HasSEO;
 
 	protected $table = 'campaigns';
 	public $incrementing = false;
@@ -115,6 +122,40 @@ class Campaign extends Model implements  HasMedia
     {
 		return $this->hasMany(CampaignTransaction::class);
 	}
+
+
+    public function getDynamicSEOData(): SEOData
+    {
+
+        return new SEOData(
+            title: Str::Ucfirst($this->title),
+            description: Str::Ucfirst(strip_tags($this->description)),
+            author: Str::Ucfirst($this->postedBy->name),
+            image: $this->hasMedia('campaigns') ? $this->getFirstMedia('campaigns')?->getUrl() : null,
+            imageMeta: $this->hasMedia('campaigns') ? new ImageMeta($this->getFirstMedia('campaigns')?->getUrl()) : null,
+            published_time: $this->created_at,
+            modified_time: $this->updated_at,
+            section: 'Campaigns',
+            schema: SchemaCollection::initialize()->addArticle()->addBreadcrumbs(
+                fn (BreadcrumbListSchema $breadcrumbs): BreadcrumbListSchema => $breadcrumbs->prependBreadcrumbs([
+                    'Homepage' => route('welcome'),
+                ])
+            ),
+            type: 'article',
+            canonical_url: route('campaign.view', ['campaign' => $this->id]),
+        );
+    }
+
+    public function registerMediaConversions(\Spatie\MediaLibrary\MediaCollections\Models\Media|null $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width('200')
+            ->nonQueued();
+
+        $this->addMediaConversion('social-media')
+            ->width('720')
+            ->nonQueued();
+    }
 
     public function registerMediaCollections(): void
     {

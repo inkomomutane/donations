@@ -37,8 +37,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'normal',
             ]);
 
+
+
+         User::factory(15)->create()->each(fn(User $user) => $user->assignRole($superAdmin));
+
+
          $adminUser = User::updateOrCreate([
-             'email' => 'test@test.com'
+             'email' => 'itelvino@ndihpezembo.online'
          ],[
              'name' => 'Itelvino Hugo',
              'email' => 'itelvino@ndihpezembo.online',
@@ -47,6 +52,9 @@ class DatabaseSeeder extends Seeder
                  'name' => 'Conselho Municipal da Beira'
              ])->id
          ]);
+
+
+
 
          $adminUser->assignRole($superAdmin);
 
@@ -72,8 +80,8 @@ class DatabaseSeeder extends Seeder
               'description' => 'Apoio'
          ]);
 
-         #Campaign::factory(50)->create()->each(
-           #  fn(Campaign $campaign) => $campaign->addMediaFromUrl('https://source.unsplash.com/random')
-             #->toMediaCollection('campaigns'));
+         Campaign::factory(150)->create()->each(
+             fn(Campaign $campaign) => $campaign->addMediaFromUrl('http://127.0.0.1:8000/img.png')
+             ->toMediaCollection('campaigns'));
     }
 }

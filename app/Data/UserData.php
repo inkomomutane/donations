@@ -13,6 +13,7 @@ class UserData extends Data
         public readonly  ?string $id,
         public readonly  ?string $name,
         public readonly  ?string $email,
+        public readonly   bool $active,
         public readonly  Lazy|null|RoleData $role,
         public readonly  Lazy|OrganizationData|null $organization,
         public bool $isSuperAdmin = false,
@@ -25,6 +26,7 @@ class UserData extends Data
             id: $user->id,
             name: $user->name,
             email: $user->email,
+            active: $user->active,
             role: Lazy::whenLoaded('roles',$user,fn() =>  $user->roles->first()?->getData()),
             organization: Lazy::whenLoaded('organization',$user,fn() => $user->organization->getData()),
             isSuperAdmin:  $user->hasRole('super-admin')

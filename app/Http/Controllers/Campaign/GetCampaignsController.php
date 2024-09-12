@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Campaign;
 use App\Models\Cause;
 use App\Models\District;
+use App\Models\User;
 use Inertia\Inertia;
 
 class GetCampaignsController extends Controller
@@ -20,7 +21,7 @@ class GetCampaignsController extends Controller
     {
         $campaigns = Campaign::paginate(12);
         return Inertia::render('Dashboard', [
-            'campaigns' => $this->handle(request('search')),
+            'campaigns' => $this->handle(request('search'),auth()->user()),
             'statuses' => CampaignEnum::toValues(),
             'paymentMethods' => CampaignPaymentMethodEnum::toValues(),
             'priorities' => CampaignPriorityEnum::toValues(),
@@ -29,8 +30,9 @@ class GetCampaignsController extends Controller
         ]);
     }
 
-    public function handle(string $search = null){
+    public function handle(string $search = null,User $user){
         $campaigns = Campaign::query()
+            ->wherePostedById($user->id)
             ->when($search, function ($query, $search) {
                 return $query->whereAny(['title','description'],'like',"%$search%");
             })

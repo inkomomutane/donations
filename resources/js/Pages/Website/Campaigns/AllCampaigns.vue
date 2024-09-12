@@ -187,7 +187,7 @@ watch(
         class="bg-gradient-to-b from-emerald-50 via-gary-200 to-emerald-100 md:pt-8 min-h-[50vh]"
     >
         <div
-            class="max-w-screen-xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
+            class="max-w-screen-lg xl:max-w-screen-xl mx-auto p-6 lg:p-8 sm:px-4 md:px-8 w-full space-y-8"
         >
             <div class="w-full">
                 <input
@@ -200,7 +200,7 @@ watch(
             </div>
             <div>
                 <div
-                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8 my-8"
+                    class="grid sm:grid-cols-2  lg:grid-cols-3 gap-6 lg:gap-8 my-8"
                 >
                     <CampaignCard
                         @donate="openDonationModal(campaign)"
